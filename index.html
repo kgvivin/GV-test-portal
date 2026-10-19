@@ -1,388 +1,893 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>GV PORTAL</title>
-<style>:root{--bg:#eef0fa;--c1:#fff;--c2:#f6f4ff;--bd:#e4e6f2;--tx:#14142b;--mu:#6b6f8a;--ac:#7b5cf0;--ok:#1a9a52;--bad:#d33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{color-scheme:light;height:100%}*{box-sizing:border-box}
-body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font:15px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
-body.ex{overflow:hidden;height:100%}
-h1,h2,h3{margin:0}h3{font-size:14px;color:var(--ac);margin:14px 0 6px}
-button,input,select,textarea{font:inherit;color:var(--tx)}
-.btn{background:var(--ac);color:#fff;border:0;padding:9px 18px;border-radius:7px;cursor:pointer;font-weight:600}
-.btn.o{background:#fff;color:var(--ac);border-color:var(--ac);border:1px solid var(--bd)}.btn.r{background:var(--bad);color:#fff}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-.top{display:flex;align-items:center;gap:14px;padding:12px 22px;background:var(--c1);border-bottom:1px solid var(--bd);flex-wrap:wrap}
-.top .sp{flex:1}.logo{font-weight:800;letter-spacing:2px;font-size:18px}
-.wrap{max-width:1100px;margin:0 auto;padding:26px 22px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
-.card{background:var(--c1);border:1px solid var(--bd);border-radius:12px;padding:22px}
-.card p{color:var(--mu);margin:6px 0 14px}.prog{color:var(--ok);font-size:13px;margin-bottom:14px}
-.lv{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
-.lc{background:var(--c1);border:1px solid var(--bd);border-radius:10px;padding:14px}
-.lc b{font-size:16px}.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;margin:6px 0 10px;border:1px solid var(--bd)}
-.tag.Completed{color:var(--ok);border-color:var(--ok)}.tag.Unlocked{color:var(--ac);border-color:var(--ac)}.tag.InProgress{color:#b7791f;border-color:#b7791f}.tag.Locked{color:var(--mu)}
-.lc .btn{width:100%;margin-top:4px}
-.ft{text-align:center;color:var(--mu);font-size:13px;padding:20px}
-.login{max-width:380px;margin:9vh auto;padding:30px}
-.login label{display:block;margin:14px 0 5px;color:var(--mu);font-size:13px}
-.login input{width:100%;padding:10px 12px;background:var(--c2);border:1px solid var(--bd);border-radius:7px}
-.pw{position:relative}.pw button{position:absolute;right:6px;top:5px;background:none;border:0;cursor:pointer;color:var(--mu)}
-.err{color:var(--bad);font-size:13px;margin-top:10px;min-height:18px}
-.exam{height:100vh;display:flex;flex-direction:column}
-.split{flex:1;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);min-height:0}
-.pl{overflow:auto;padding:16px 20px;border-right:1px solid var(--bd)}
-.pr{display:flex;flex-direction:column;min-height:0;padding:12px;gap:8px;overflow:hidden}
-pre{margin:0;background:var(--c2);border:1px solid var(--bd);border-radius:7px;padding:8px 10px;font:13px Consolas,"Courier New",monospace;white-space:pre-wrap;overflow-x:auto}
-.ed{flex:1;display:flex;min-height:170px;position:relative;border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:var(--c2)}
-.ed pre{border:0;border-radius:0;background:#f1eefc;color:var(--mu);text-align:right;overflow:hidden;white-space:pre;min-width:38px}
-.ed textarea{flex:1;border:0;background:transparent;resize:none;outline:0;padding:8px 10px;font:13px/1.5 Consolas,"Courier New",monospace;white-space:pre;overflow:auto;tab-size:4}
-.ed pre{line-height:1.5;padding:8px 8px}
-.ac{position:absolute;left:46px;bottom:6px;background:#fff;border:1px solid var(--bd);border-radius:7px;display:none;z-index:4;min-width:160px;font:13px Consolas,monospace}
-.ac div{padding:4px 12px;cursor:pointer}.ac .on{background:var(--ac);color:#fff}
-.bot{max-height:42%;overflow:auto;display:flex;flex-direction:column;gap:6px}
-.bot textarea{width:100%;height:56px;background:var(--c2);border:1px solid var(--bd);border-radius:7px;padding:6px 8px;font:13px Consolas,monospace}
-.tc{padding:6px 10px;border:1px solid var(--bd);border-radius:6px;margin:4px 0;font-size:13.5px;background:var(--c1)}
-.p{color:var(--ok);font-weight:700}.f{color:var(--bad);font-weight:700}
-.tabs{display:flex;gap:6px}.tabs button{background:var(--c2);border:1px solid var(--bd);border-radius:6px;padding:6px 12px;cursor:pointer}.tabs .on{background:var(--ac);color:#fff}
-.mod{position:fixed;inset:0;background:rgba(20,20,43,.45);display:flex;align-items:center;justify-content:center;z-index:50}
-.mbox{background:var(--c1);border:1px solid var(--bd);border-radius:12px;padding:22px;max-width:420px}.mb{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
-.res{background:#fff;color:#000;border-radius:12px;padding:28px;max-width:640px;margin:30px auto;border-left:8px solid var(--bad)}
-.res.ok{border-left-color:var(--ok)}.res h2,.res p,.res b{color:#000}.res .big{font-size:34px;font-weight:800}
-.res .btn.o{color:#000;border-color:#999}
-.warn{background:#fff7e0;border:1px solid #f0c14b;color:#6b4e00;border-radius:8px;padding:10px 14px;margin-top:14px;font-size:13.5px}
-.fld{display:grid;grid-template-columns:minmax(120px,170px) 1fr;gap:6px;margin:5px 0;font-size:13px;align-items:center}
-.fld input,.fld select{background:var(--c2);border:1px solid var(--bd);border-radius:6px;padding:6px 8px;width:100%}
-.given{background:var(--c2);border-radius:7px;padding:8px 10px;margin:8px 0;font-size:14px}
-iframe{flex:1;width:100%;border:1px solid var(--bd);border-radius:8px;background:#fff;min-height:200px}
-@media(max-width:860px){.split{grid-template-columns:1fr;overflow:auto}.exam{height:auto;min-height:100vh}body.ex{overflow:auto}}
-</style></head><body>
-<div id="app"></div>
-<script src="https://cdn.jsdelivr.net/npm/JSCPP@2.0.6/dist/JSCPP.es5.min.js"></script>
-<script>
-const num=s=>s.trim().split(/\s+/).map(Number);
-const rd=x=>{let r=0;while(x>9){r=0;while(x>0){r+=x%10;x=Math.floor(x/10)}x=r}return x};
-const pf=n=>{let s=0;for(let p=2;p<=n;p++)while(n%p===0){s+=p;n/=p}return s};
-const rom=n=>{const m=[[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];let r="";for(const[v,t]of m)while(n>=v){r+=t;n-=v}return r};
-const gcd=(a,b)=>b?gcd(b,a%b):a;
-const isP=n=>{if(n<2)return false;for(let i=2;i*i<=n;i++)if(n%i===0)return false;return true};
-const tri=(n,f)=>{if(n<=0)return"Invalid";let k=1,o=[];for(let i=1;i<=n;i++){let r=[];for(let j=0;j<i;j++)r.push(k++);o.push(r.join(" "))}return o.join("\n")};
-const lp=y=>y%400===0||(y%4===0&&y%100!==0);
-const pal=n=>{const t=String(n);return t===[...t].reverse().join("")};
-const rows=(n,fn)=>{const o=[];for(let i=1;i<=n;i++)o.push(fn(i));return o.join("\n")};
-const range=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
-const Q=[
-{t:"Fibonacci Series",sc:"A teacher wants to show students how the Fibonacci series grows. The first two terms are 0 and 1, and each next term is the sum of the previous two.",task:"Write a program that reads a positive integer n and prints the first n Fibonacci numbers, each followed by a comma. If n is not positive, print invalid input.",con:["-100 ≤ n ≤ 40","Print all numbers on one line, no spaces"],s:"5",h:["4","7","-1","11","20"],f:x=>{const n=+x;if(n<=0)return"invalid input";let a=0,b=1,o="";for(let i=0;i<n;i++){o+=a+",";[a,b]=[b,a+b]}return o}},
-{t:"Prime or Composite Number",sc:"Alex finds an ancient book that opens only when a number is identified correctly as prime or composite.",task:"Read an integer n and print whether it is a prime or a composite number, in the format shown in the samples.",con:["2 ≤ n ≤ 100000","Output format: N is a prime number / N is a composite number"],s:"7",h:["15","50","29","97","121"],f:x=>{const n=+x;let p=n>1;for(let i=2;i*i<=n;i++)if(n%i===0)p=false;return n+(p?" is a prime number":" is a composite number")}},
-{t:"Abundant Number",sc:"In Mathville, Alex hunts for abundant numbers, whose proper divisors add up to more than the number itself.",task:"Read an integer n. Add all its proper divisors (excluding n). If the sum is greater than n print 'n is an abundant number', otherwise print 'n is not an abundant number'.",con:["1 ≤ n ≤ 100000"],s:"12",h:["18","13","24","16","30"],f:x=>{const n=+x;let s=0;for(let i=1;i<n;i++)if(n%i===0)s+=i;return n+(s>n?" is an abundant number":" is not an abundant number")}},
-{t:"Harmonic Series",sc:"A program must add the harmonic series 1 + 1/2 + 1/3 + ... up to the n-th term.",task:"Read a positive integer n and print the sum of the harmonic series up to n with 2 decimal places. If n is not positive, print invalid input.",con:["-100 ≤ n ≤ 1000","Use floating point division"],s:"10",h:["4","5","24","61","-2"],f:x=>{const n=+x;if(n<=0)return"invalid input";let s=0;for(let i=1;i<=n;i++)s+=1/i;return s.toFixed(2)}},
-{t:"Digits Count",sc:"A calculator company wants to show how many digits a number has.",task:"Read an integer (it may be negative or zero) and print the number of digits in it. Use a loop.",con:["-10^9 < n < 10^9","0 has 1 digit; ignore the minus sign"],s:"47580",h:["78562453","4521","-2578963","0","-36528000"],f:x=>String(Math.abs(+x)).length+""},
-{t:"Pyramid Pattern",sc:"Users enter the number of rows and expect a triangle of consecutive numbers starting from 1.",task:"Read the number of rows and print a pyramid where row i has i numbers, continuing from 1. For 0 or negative input print invalid.",con:["-10 ≤ rows ≤ 20","Numbers in a row are separated by a single space"],s:"4",h:["3","2","0","5","6"],f:x=>tri(+x)},
-{t:"Perfect Cubes",sc:"A maths enthusiast wants the cubes of three consecutive numbers starting from a given number.",task:"Read an integer n. If n is positive, print the cubes of n, n+1 and n+2, each on a new line. Otherwise print invalid.",con:["-100 ≤ n ≤ 1000"],s:"10",h:["4","1","0","7","15"],f:x=>{const n=+x;return n<=0?"Invalid":[n,n+1,n+2].map(v=>v**3).join("\n")}},
-{t:"Roman Numerals",keep:1,sc:"A user interface must convert small numbers into Roman numerals.",task:"Read an integer and print its Roman numeral. Reference: I-1, IV-4, V-5, IX-9, X-10, XL-40. If the number is below 1 or above 40, print invalid input.",con:["-100 ≤ n ≤ 100"],s:"37",h:["16","9","40","-7","12"],f:x=>{const n=+x;return n<1||n>40?"invalid input":rom(n)}},
-{t:"Strong Number",sc:"A mathematician notices that some numbers equal the sum of the factorials of their digits.",task:"Read an integer n. If the sum of factorials of its digits equals n print 'n is a strong number', otherwise print 'n is not a strong number'",con:["1 ≤ n ≤ 100000"],s:"123",h:["345","2567","145","45908","40585"],f:x=>{const n=+x,F=[1,1,2,6,24,120,720,5040,40320,362880];const s=String(n).split("").reduce((a,d)=>a+F[+d],0);return n+(s===n?" is a strong number":" is not a strong number")}},
-{t:"LCM Finder",sc:"A developer needs the least common multiple of two numbers.",task:"Read two integers. If any of them is negative print negative input, otherwise print their LCM.",con:["-1000 ≤ a, b ≤ 1000","a and b are given on one line"],s:"12 18",h:["45 1","45 4","5 4","5 7","-1 -2"],f:x=>{const[a,b]=num(x);return a<0||b<0?"negative input":String(a*b/gcd(a,b))}},
-{t:"Digit Summation",sc:"Milo keeps adding the digits of a number until only one digit is left.",task:"Read an integer and repeatedly sum its digits until the sum becomes a single digit. Print that digit.",con:["1 ≤ n ≤ 10^9"],s:"9876",h:["631","440","913","66","8456"],f:x=>String(rd(+x))},
-{t:"Handshake Simulation",sc:"At a conference every person shakes hands with every other person exactly once.",task:"Read the number of people and print the total number of handshakes.",con:["1 ≤ n ≤ 1000"],s:"6",h:["8","22","15","20","45"],f:x=>{const n=+x;return String(n*(n-1)/2)}},
-{t:"Sum of All Prime Factors",sc:"An analyst wants to add all the prime factors of financial figures.",task:"Read an integer n and print the sum of its prime factors. A repeated prime factor is added each time it divides n (36 = 2×2×3×3, so the sum is 10).",con:["2 ≤ n ≤ 100000"],s:"36",h:["102","46","160","78","22"],f:x=>String(pf(+x))},
-{t:"Smallest 5 Primes Greater Than N",sc:"At a village fair, children win a prize if they pick a prime number.",task:"Read an integer n and print the 5 smallest prime numbers greater than n, each on a new line.",con:["1 ≤ n ≤ 10000"],s:"10",h:["99","20","46","132","75"],f:x=>{let o=[];for(let k=+x+1;o.length<5;k++)if(isP(k))o.push(k);return o.join("\n")}},
-{t:"Series Sum Calculator",sc:"A maths platform shows a series built by repeating a digit, such as 3 + 33 + 333.",task:"Read a digit d and the number of terms n. Print the series (terms separated by ' + ') on the first line and its sum on the second line.",con:["1 ≤ d ≤ 9","1 ≤ n ≤ 8"],s:"3 4",h:["2 5","1 6","9 2","7 4","6 4"],f:x=>{const[d,n]=num(x);let t=[],sm=0;for(let i=1;i<=n;i++){t.push(String(d).repeat(i));sm+=+String(d).repeat(i)}return t.join(" + ")+"\n"+sm}},
-{t:"Divisor Sum and Equality Checker",sc:"A mysterious code lists the divisors of a number and checks if their sum equals the number.",task:"Read n. Print its proper divisors (excluding n) separated by spaces, then their sum, then 'n is an equal number' or 'n is not an equal number'.",con:["2 ≤ n ≤ 10000"],s:"42",h:["28","25","496","16","78"],f:x=>{const n=+x;let d=[];for(let i=1;i<n;i++)if(n%i===0)d.push(i);const sm=d.reduce((a,b)=>a+b,0);return d.join(" ")+"\n"+sm+"\n"+n+(sm===n?" is an equal number":" is not an equal number")}},
-{t:"Geometric Series Sum",sc:"John adds the series 1 + 1/2 + 1/4 + 1/8 + ... where each term is half of the previous term.",task:"Read N and print the sum of the first N terms with 2 decimal places. For negative N print 0.00.",con:["-100 ≤ N ≤ 50"],s:"6",h:["4","3","7","-7","12"],f:x=>{const n=+x;if(n<0)return"0.00";let s=0,t=1;for(let i=0;i<n;i++){s+=t;t/=2}return s.toFixed(2)}},
-{t:"Sum of Squares of N Natural Numbers",sc:"A program must add the squares of 1, 2, 3 ... up to N.",task:"Read a positive integer N and print 1² + 2² + ... + N². If N is 0 or negative print invalid input.",con:["-100 ≤ N ≤ 1000"],s:"5",h:["25","12","21","72","-5"],f:x=>{const n=+x;if(n<=0)return"invalid input";let s=0;for(let i=1;i<=n;i++)s+=i*i;return String(s)}},
-{t:"Swap the Digits",sc:"Tom wants to swap the first and last digits of a number.",task:"Read a positive integer and print the number after swapping its first and last digits.",con:["10 ≤ n ≤ 10^9","The last digit is never 0 after the swap rule is applied to the given tests"],s:"12345",h:["258714","428571","571428","857142","109876"],f:x=>{const a=x.trim().split("");[a[0],a[a.length-1]]=[a[a.length-1],a[0]];return a.join("")}},
-{t:"Sum of Odd and Even Numbers up to N",sc:"Tom practices loops by adding odd and even numbers separately.",task:"Read n. Print the sum of all odd numbers from 1 to n on the first line and the sum of all even numbers from 1 to n on the second line.",con:["1 ≤ n ≤ 1000"],s:"5",h:["8","4","7","15","30"],f:x=>{const n=+x;let o=0,e=0;for(let i=1;i<=n;i++)i%2?o+=i:e+=i;return o+"\n"+e}},
-{t:"Narcissistic Numbers",sc:"Alice studies numbers equal to the sum of their digits each raised to the number of digits.",task:"Read n. Print 'n is a narcissistic number' or 'n is not a narcissistic number'.",con:["0 ≤ n ≤ 100000"],s:"153",h:["1","370","42","1634","12"],f:x=>{const n=+x,d=String(n).split("").map(Number);return n+(d.reduce((a,b)=>a+b**d.length,0)===n?" is a narcissistic number":" is not a narcissistic number")}},
-{t:"Digit Sum Calculator",sc:"Tom wants the sum of the even digits and the sum of the odd digits of a number.",task:"Read an integer (up to 10 digits). Use a while loop. Print the sum of even digits on the first line and the sum of odd digits on the second line.",con:["1 ≤ n ≤ 10^9"],s:"123456",h:["86953","37159","45987","768543","529032959"],f:x=>{let e=0,o=0;for(const c of x.trim()){const d=+c;d%2?o+=d:e+=d}return e+"\n"+o}},
-{t:"Sum of First and Last Digit",sc:"A calculator needs a quick integrity check using the first and last digit of a number.",task:"Read a number and print the sum of its first and last digits.",con:["10 ≤ n ≤ 10^9"],s:"78956",h:["45126","98745","7562","9999","45623"],f:x=>{const t=x.trim();return String(+t[0]+ +t[t.length-1])}},
-{t:"Fibonacci Even Number Generator",sc:"Jack wants only the even numbers of the Fibonacci sequence up to a limit.",task:"Read a limit and print the even Fibonacci numbers (starting from 0) that are less than or equal to the limit, separated by spaces. For 0 or a negative limit print invalid.",con:["-100 ≤ limit ≤ 100000"],s:"5",h:["40","150","-2","2600","11000"],f:x=>{const n=+x;if(n<=0)return"Invalid";let a=0,b=1,o=[];while(a<=n){if(a%2===0)o.push(a);[a,b]=[b,a+b]}return o.join(" ")}},
-{t:"Odd or Even Numbers Series",sc:"A teacher prints a series of odd or even numbers depending on the limit.",task:"Read a limit. If the limit is odd print all odd numbers up to it, if even print all even numbers up to it, separated by spaces. If the limit is 0 or negative print not a positive integer.",con:["-100 ≤ limit ≤ 1000"],s:"9",h:["7","8","15","18","-4"],f:x=>{const n=+x;if(n<=0)return"not a positive integer";let o=[];for(let i=n%2?1:2;i<=n;i+=2)o.push(i);return o.join(" ")}},
-{t:"Vowel Counter",sc:"A developer counts the vowels in a word.",task:"Read a single word (no spaces) and print the number of vowels (a, e, i, o, u in upper or lower case) in it.",con:["1 ≤ length ≤ 50","The word contains only letters"],s:"Bestfriends",h:["PersonalizedSkill","PSTeam","PSHeadquarters","helloworld","waterbottle"],f:x=>String((x.match(/[aeiou]/gi)||[]).length)},
-{t:"Harshad Number",sc:"Students check numbers that are divisible by the sum of their digits.",task:"Read n. Print 'n is harshad number' if n is divisible by the sum of its digits, otherwise print 'n is not harshad number'",con:["1 ≤ n ≤ 100000"],s:"18",h:["25","12","36","51","21"],f:x=>{const n=+x,sm=String(n).split("").reduce((a,b)=>a+ +b,0);return n+(n%sm===0?" is harshad number":" is not harshad number")}},
-{t:"Leap and Non-Leap Years",sc:"Friends want to know if a year is a leap year and how many leap years follow it.",task:"Read a year. Print 'Y is a leap year' or 'Y is not a leap year'. Then print 'leap years: L' and 'non-leap years: N' for the 10 years after the given year (year+1 to year+10).",con:[],s:"2022",s2:"2020",h:["2024","2010","2100","1996","2018"],f:x=>{const y=+x;const L=range(y+1,y+10).filter(lp).length;return y+(lp(y)?" is a leap year":" is not a leap year")+"\nleap years: "+L+"\nnon-leap years: "+(10-L)}},
-{t:"Square Pattern",sc:"Alice prints a square of # characters for a visual project.",task:"Read the size of the square and print it using '#' separated by spaces. If the size is less than 1 print 'N is invalid input' (N is the number given).",con:[],s:"3",s2:"-10",h:["6","5","0","-5","2"],f:x=>{const n=+x;return n<1?n+" is invalid input":rows(n,()=>Array(n).fill("#").join(" "))}},
-{t:"Alphabet Triangle Generator",keep:1,sc:"Children build a triangle from alphabet blocks.",task:"Read the number of rows N. Print N rows where row i has the i-th letter (A, B, C, ...) repeated i times. If N is 0 or negative print invalid.",con:[],s:"3",s2:"0",h:["2","4","-3","5","6"],f:x=>{const n=+x;return n<=0?"invalid":rows(n,i=>String.fromCharCode(64+i).repeat(i))}},
-{t:"Finding the Next Palindrome",sc:"Sarah looks for the next palindromic number after a given number.",task:"Read an integer and print the smallest palindrome number greater than it.",con:[],s:"123",h:["1234","5432","999","600","1120"],f:x=>{let n=+x+1;while(!pal(n))n++;return String(n)}},
-{t:"Consecutive Palindromic Numbers",sc:"Alice generates palindromic numbers starting from a given number.",task:"Read a starting number and print the next five palindromic numbers (the start itself counts if it is a palindrome), separated by spaces.",con:[],s:"10",s2:"99",h:["500","11","12345","777","650"],f:x=>{let n=+x,o=[];while(o.length<5){if(pal(n))o.push(n);n++}return o.join(" ")}},
-{t:"Palindromic Right-Angled Triangle",sc:"John prints a triangle whose rows go up and then come back down.",task:"Read the number of rows N. Row i prints i ascending numbers (continuing the counter from the previous row) followed by the same numbers descending without repeating the last one. For N of 0 or less print invalid.",con:[],s:"4",s2:"-4",h:["2","3","0","5","6"],f:x=>{const n=+x;if(n<=0)return"invalid";let k=1;return rows(n,i=>{const a=[];for(let j=0;j<i;j++)a.push(k++);return a.concat(a.slice(0,-1).reverse()).join(" ")})}},
-{t:"The Palindromic Sum",sc:"Alice adds all palindromic numbers up to a limit.",task:"Read a positive integer n and print the sum of all palindrome numbers from 1 to n.",con:[],s:"10",s2:"99",h:["19","36","95","150","70"],f:x=>{let t=0;for(let i=1;i<=+x;i++)if(pal(i))t+=i;return String(t)}},
-{t:"Multiples of 5 Pattern",sc:"A program prints rows of multiples of 5 that grow with each row.",task:"Read the number of rows. Row i prints 5, 10, ... up to i multiples of 5. If rows is less than 1 print invalid.",con:[],s:"4",s2:"-5",h:["3","5","7","-8","1"],f:x=>{const n=+x;return n<1?"invalid":rows(n,i=>range(1,i).map(v=>v*5).join(" "))}},
-{t:"Squares of Even or Odd Numbers",sc:"A program prints squares depending on whether the input is even or odd.",task:"Read an integer. If it is even print the squares of all even numbers up to it, if odd print the squares of all odd numbers up to it, separated by spaces.",con:[],s:"6",s2:"11",h:["7","12","9","21","8"],f:x=>{const n=+x,o=[];for(let i=n%2?1:2;i<=n;i+=2)o.push(i*i);return o.join(" ")}},
-{t:"Prime Pattern",sc:"A right-angled triangle prints asterisks only for prime-numbered rows.",task:"Read the number of rows. For every row number that is prime print that many asterisks separated by spaces (row 2 prints 2, row 3 prints 3). 1 is not prime.",con:[],s:"6",s2:"10",h:["5","8","2","4","7"],f:x=>{const o=[];for(let i=2;i<=+x;i++)if(isP(i))o.push(Array(i).fill("*").join(" "));return o.join("\n")}},
-{t:"The Perfect Number Detective",sc:"Sam detects perfect numbers, whose proper divisors add up to the number.",task:"Read n. If n is a perfect number print its largest proper divisor, otherwise print n itself.",con:[],s:"6",s2:"10",h:["28","12","496","50","8128"],f:x=>{const n=+x;let s=0,m=0;for(let i=1;i<n;i++)if(n%i===0){s+=i;m=i}return String(s===n?m:n)}},
-{t:"Digit Incrementer",sc:"Programmers build a toy encryption that adds 1 to every digit.",task:"Read an integer and add 1 to each digit (9 becomes 0). Print the new number without leading zeros.",con:[],s:"245",s2:"9876",h:["7345","12589","9765","3087","51276"],f:x=>String(+x.trim().split("").map(d=>(+d+1)%10).join(""))},
-{t:"Printing Pattern in Reverse Order",sc:"A teaching tool prints number rows that get shorter.",task:"Read the number of rows N. Row 1 prints 1 to N, row 2 prints 1 to N-1, and so on until 1. If N is 0 or less print invalid input.",con:[],s:"4",s2:"-4",h:["7","8","2","1","0"],f:x=>{const n=+x;if(n<=0)return"invalid input";const o=[];for(let k=n;k>=1;k--)o.push(range(1,k).join(" "));return o.join("\n")}},
-{t:"The Odd Factorial Quest",sc:"Adventurers must find the product of all odd numbers up to an odd number.",task:"Read n. If n is less than 1 print invalid. If n is even print please enter a valid odd number. Otherwise print the product of all odd numbers from 1 to n.",con:[],s:"5",s2:"6",h:["7","-3","4","11","13"],f:x=>{const n=+x;if(n<1)return"invalid";if(n%2===0)return"please enter a valid odd number";let p=1;for(let i=1;i<=n;i+=2)p*=i;return String(p)}},
-{t:"Series Expansion",sc:"Students explore the series 1 - x^2/2! + x^4/4! - x^6/6! + ...",task:"Read x and then the number of terms n. Print the sum of the first n terms of the series with 2 decimal places.",con:[],s:"7\n5",s2:"4\n7",h:["6\n4","9\n5","10\n6","7\n7","9\n8"],f:x=>{const[a,n]=num(x);let s=0,t=1;for(let k=0;k<n;k++){s+=(k%2?-1:1)*t;t=t*a*a/((2*k+1)*(2*k+2))}return s.toFixed(2)}},
-{t:"Exploring the Growth Series",sc:"Lily studies a series where every term is twice the previous one.",task:"Read the number of terms and then the first term. Print the series separated by spaces.",con:[],s:"5\n3",h:["6\n11","3\n15","8\n10","1\n7","7\n3"],f:x=>{const[n,a]=num(x);return range(0,n-1).map(i=>a*2**i).join(" ")}},
-{t:"Sum of N Odd Natural Numbers",sc:"A community centre teaches odd numbers to children.",task:"Read n. Print the first n odd natural numbers on the first line and their sum on the second line.",con:[],s:"5",h:["4","6","8","3","9"],f:x=>{const n=+x;return range(1,n).map(i=>2*i-1).join(" ")+"\n"+n*n}},
-{t:"Floyd's Triangle",sc:"A program prints Floyd's Triangle, a triangle of consecutive natural numbers.",task:"Read the number of rows and print Floyd's Triangle starting from 1. For a negative number print invalid.",con:[],s:"4",s2:"-2",h:["5","2","-7","8","3"],f:x=>+x<0?"invalid":tri(+x)},
-{t:"Automorphic Number",sc:"A maths club looks for numbers whose square ends with the number itself.",task:"Read n. Print 'n is an automorphic number' if the square of n ends with the digits of n, otherwise print 'n is not an automorphic number'.",con:[],s:"6",s2:"7",h:["25","15","8","76","376"],f:x=>{const n=+x;return n+(String(n*n).endsWith(String(n))?" is an automorphic number":" is not an automorphic number")}},
-{t:"Sum of Even Numbers",sc:"A program adds the even numbers from 1 to N.",task:"Read a positive integer N and print the sum of even numbers from 1 to N. For a negative N print 'N is an invalid number'.",con:[],s:"20",s2:"-12",h:["11","25","31","-6","40"],f:x=>{const n=+x;if(n<0)return n+" is an invalid number";let s=0;for(let i=2;i<=n;i+=2)s+=i;return String(s)}},
-{t:"XOR Operations",sc:"An encryption developer applies a number rule repeatedly until the value reaches 1.",task:"Read n. While n is not 1: if n is even divide it by 2, if odd multiply by 3 and add 1. Print the number of steps taken.",con:[],s:"6",s2:"25",h:["16","30","46","72","7"],f:x=>{let n=+x,c=0;while(n!==1){n=n%2?3*n+1:n/2;c++}return String(c)}},
-{t:"Sum of the Middle Digits",sc:"A bank validates an account number using its middle digits.",task:"Read a number and print the sum of its digits excluding the first and the last digit.",con:[],s:"14562",s2:"10254823",h:["369852","4789562","789","8523","87456"],f:x=>{const t=x.trim().slice(1,-1);return String([...t].reduce((a,b)=>a+ +b,0))}},
-{t:"Perfect Square",sc:"A developer checks whether a number is a perfect square.",task:"Read an integer n. For a negative n print 'n is invalid number'. Otherwise print 'n is a perfect square' or 'n is not a perfect square'.",con:[],s:"16",s2:"2",h:["400","25","785","-1","9"],f:x=>{const n=+x;if(n<0)return n+" is invalid number";return n+(Number.isInteger(Math.sqrt(n))?" is a perfect square":" is not a perfect square")}},
-{t:"Alphabetical Pattern",keep:1,sc:"A program prints rows of letters in alphabetical order.",task:"Read the number of rows (1 to 26). Row i prints the first i letters (A, AB, ABC, ...). If the number is below 1 or above 26 print 'N is an invalid input'.",con:[],s:"5",s2:"30",h:["4","3","6","-10","27"],f:x=>{const n=+x;return n<1||n>26?n+" is an invalid input":rows(n,i=>range(1,i).map(c=>String.fromCharCode(64+c)).join(""))}},
-{t:"Product of N Digits",sc:"A device multiplies all the digits of a number it receives.",task:"Read a number and print the product of its digits. If the product is zero print invalid input.",con:[],s:"1258",s2:"12508",h:["741258","453789","928679861","6782341","998045"],f:x=>{const p=[...x.trim()].reduce((a,b)=>a*b,1);return p===0?"invalid input":String(p)}},
-{t:"Prime Numbers in a Range",sc:"Children at a fair look for prime numbers between two chosen numbers.",task:"Read the starting number and the ending number. Print all prime numbers in that range (both included) separated by spaces.",con:[],s:"10\n25",s2:"2\n5",h:["5\n20","10\n30","11\n34","1\n10","67\n95"],f:x=>{const[a,b]=num(x);return range(a,b).filter(isP).join(" ")}},
-{t:"Palindrome Check",sc:"Students at a maths club test numbers for symmetry.",task:"Read a positive integer. Print 'n is a palindrome' if it reads the same forwards and backwards, otherwise print 'n is not a palindrome'.",con:[],s:"33233",s2:"3214",h:["121","66","145","77","1064"],f:x=>{const n=+x;return n+(pal(n)?" is a palindrome":" is not a palindrome")}},
-{t:"Check Second Even Number",sc:"A data-analysis project works with a user-defined range.",task:"Read the starting and ending numbers of a range. If both numbers are odd print 'a and b are not even'. Otherwise print the second even number of the range.",con:[],s:"14 20",s2:"15 41",h:["16 40","80 120","75 25","150 500","79 45"],f:x=>{const[a,b]=num(x);if(a%2&&b%2)return a+" and "+b+" are not even";return String((a%2?a+1:a)+2)}},
-{t:"Reverse the Digits",sc:"A numerical tool reverses the digits of a positive number.",task:"Read an integer. If it is negative print 'n is not a positive number', otherwise print the number with its digits reversed (leading zeros of the result are dropped).",con:[],s:"96387",s2:"-52",h:["9963821","5869","29876","480","1200"],f:x=>{const n=+x;return n<0?n+" is not a positive number":String(+String(n).split("").reverse().join(""))}},
-{t:"Multiples of 5 — Pattern Printing",sc:"A program prints rows of multiples of 5 that grow with each row.",task:"Read the number of rows. Row i prints the first i multiples of 5. If the number of rows is less than 1 print 'n is an invalid input'.",con:[],s:"4",s2:"-35",h:["3","8","6","0","5"],f:x=>{const n=+x;return n<1?n+" is an invalid input":rows(n,i=>range(1,i).map(v=>v*5).join(" "))}}
-];
-const S2={"Fibonacci Series":"-5","Prime or Composite Number":"12","Abundant Number":"7","Harmonic Series":"-15","Pyramid Pattern":"-3","Perfect Cubes":"-5","Roman Numerals":"56","Strong Number":"1","LCM Finder":"-3 4","Divisor Sum and Equality Checker":"6","Geometric Series Sum":"-1","Sum of Squares of N Natural Numbers":"-10","Narcissistic Numbers":"126","Fibonacci Even Number Generator":"-6","Odd or Even Numbers Series":"4","Harshad Number":"99"};
-Q.forEach(x=>{if(S2[x.t])x.s2=S2[x.t]});
+<html lang="en">
 
-const D={G:["Google Patents","https://patents.google.com"],E:["Espacenet","https://worldwide.espacenet.com"],W:["WIPO PATENTSCOPE","https://patentscope.wipo.int"]};
-const tools=[["Google Patents",D.G[1],"Free full-text search, family and citation view."],["Espacenet",D.E[1],"EPO database, CPC classification search."],["WIPO PATENTSCOPE",D.W[1],"PCT international applications and national collections."]];
-const dt=["Date of Application (dd.mm.yyyy)","d"],st=["Application Status","s"],pub=["Date of publication (dd.mm.yyyy)","d"],gr=["Date of Grant (dd.mm.yyyy)","d"],ti=["Title (UPPER CASE)","u"],an=["Application Number","t"],tp=["Title of the Patent (UPPER CASE)","u"],ap=["Application number","t"],dn=["Device name (UPPER CASE)","u"],at=["Application Title (UPPER CASE)","u"];
-const g=(a)=>a;
-const Q1={
-B:[
-{n:1,db:"W",given:["Patent Application: 93420215"],f:[dt,st,pub,ti]},
-{n:2,db:"W",given:["Patent Application: 202141023814"],f:[dt,st,pub,ti]},
-{n:3,db:"G",given:["Patent Application: US15/795,915"],f:[dt,st,gr,ti]},
-{n:4,db:"W",given:["Patent Application: 93420215"],f:[dt,st,pub,ti]}],
-C:[
-{n:5,db:"W",given:["Company Name: Airbus","Grant date: 14.08.2012","Title description: AIRCRAFT AGAINST A HARD LANDING"],f:[an,ti,st]},
-{n:6,db:"E",given:["Company Name: HCL TECHNOLOGIES LTD","Publication date: 02.06.2016","Title description: DEVICE OVER AN INTERNET OF THINGS"],f:[an,ti,st]},
-{n:7,db:"E",given:["Company Name: CISCO SYSTEMS INC","Publication date range: 09.09.1997 : 10.09.1997","Abstract description: cell at the beginning or end of a frame"],f:[an,ti,st]}],
-D:[
-{n:8,db:"G",given:["CPC Classification code: A61B6/0487","Country of origin: US","Priority date range: 21.11.2006 - 22.11.2006"],f:[tp,ap,st]},
-{n:9,db:"G",given:["CPC Classification code: A01N59/12","Country of origin: CU (Cuba)","Application date range: 01.06.2016 - 30.09.2016"],f:[tp,ap,st]},
-{n:10,db:"W",given:["CPC Classification code: E04H1/005","Country of origin: EP (European Patent Office)","Publication date range: 11.10.2006 TO 11.11.2006"],f:[tp,ap,st]}],
-E:[
-{n:11,db:"W",given:["Company name: Pendulum Fitness, Inc.","Publication date: 26.02.2002","Hint: A mass (bob) attached to a string that swings back and forth under the influence of gravity. It demonstrates simple harmonic motion."],f:[dn,ap,at,st]},
-{n:12,db:"E",given:["Company name: BLOODLINE TECHNOLOGY","Publication date: 30.04.1991","Hint: A medical instrument used for listening to internal body sounds, such as heartbeats and lung sounds."],f:[dn,ap,at,st]},
-{n:13,db:"G",given:["Company name: Xidian University","Priority date: 19.08.2015","Hint: A tool with two pivoted blades that slide past each other to cut materials. The pivot acts as the fulcrum, making it a lever."],f:[dn,ap,at,st]}]
-};
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GV PORTAL</title>
+  <style>
+    :root {
+      --bg: #eef0fa;
+      --c1: #fff;
+      --c2: #f6f4ff;
+      --bd: #e4e6f2;
+      --tx: #14142b;
+      --mu: #6b6f8a;
+      --ac: #7b5cf0;
+      --ok: #1a9a52;
+      --bad: #d33;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
 
-const PL=[
-["US174465A","07.03.1876","Alexander Graham Bell","a method and apparatus for sending speech over wires (telephone)",null],
-["US223898A","27.01.1880","Thomas A. Edison","a glowing carbon filament lamp in a sealed glass bulb","H01K"],
-["US821393A","22.05.1906","Orville Wright, Wilbur Wright","a powered heavier-than-air flying machine with wings and rudders","B64C"],
-["US200521A","19.02.1878","Thomas A. Edison","a machine that records and plays back sound on a rotating cylinder","G11B"],
-["US6281A","10.04.1849","Walter Hunt","a coiled wire pin with a guard covering the sharp point","A44B"],
-["US1219881A","20.03.1917","Gideon Sundback","interlocking teeth closed by a sliding pull","A44B"],
-["US6285999B1","04.09.2001","Lawrence Page","ranking nodes in a linked database such as the web","G06F"],
-["US381968A","01.05.1888","Nikola Tesla","an alternating-current electric motor","H02K"],
-["US1773980A","26.08.1930","Philo T. Farnsworth","an electronic system for transmitting moving pictures","H04N"],
-["US2524035A","03.10.1950","John Bardeen, Walter H. Brattain","a three-electrode semiconductor element that amplifies signals","H01L"],
-["US4237224A","02.12.1980","Stanley N. Cohen, Herbert W. Boyer","producing recombinant DNA molecules in host cells","C12N"],
-["US3009235A","21.11.1961","George de Mestral","a hook-and-loop separable fastening device","A44B"],
-["US3005282A","24.10.1961","Godtfred Kirk Christiansen","a toy building brick with studs and tubes","A63H"],
-["US5960411A","28.09.1999","Peri Hartman","placing a purchase order over a network with a single action","G06Q"],
-["US4378116A","29.03.1983","Erno Rubik","a cube puzzle whose rotating layers scramble colours","A63F"],
-["US2026082A","31.12.1935","Charles B. Darrow","a board game about buying and trading properties","A63F"],
-["US2929922A","22.03.1960","Arthur L. Schawlow, Charles H. Townes","amplifying microwaves and light by stimulated emission (maser/laser)","H01S"],
-["US3541541A","17.11.1970","Douglas C. Engelbart","a hand-held device that moves a cursor on a display","G06F"],
-["US4063220A","13.12.1977","Robert M. Metcalfe","a data network that detects collisions between senders","H04L"],
-["US549160A","05.11.1895","George B. Selden","a self-propelled road vehicle with a gasoline engine",null],
-["US139121A","20.05.1873","Jacob W. Davis, Levi Strauss","metal rivets that strengthen pocket openings in trousers",null],
-["US31128A","15.01.1861","Elisha G. Otis","a hoisting platform with a safety catch",  "B66B"],
-["US645576A","20.03.1900","Nikola Tesla","transmitting electrical energy without wires",null],
-["US1102653A","07.07.1914","Robert H. Goddard","a rocket using solid or liquid fuel","F02K"],
-["US763772A","28.06.1904","Guglielmo Marconi","tuned apparatus for wireless telegraphy","H04B"],
-["US775134A","15.11.1904","King C. Gillette","a safety razor with a thin replaceable blade","B26B"],
-["US3138743A","23.06.1964","Jack S. Kilby","several electronic parts formed on one piece of semiconductor","H01L"],
-["US2981877A","25.04.1961","Robert N. Noyce","a semiconductor device with leads on a flat surface","H01L"],
-["US3953566A","27.04.1976","Robert W. Gore","a stretched porous PTFE material",null]];
-const OFF=["Fibonacci Series", "Smallest Prime Number", "Prime or Composite Number", "Series Sum Calculator", "Divisor Sum and Equality Checker", "Abundant Number", "Count the Number of Leap and Non-Leap Years", "Geometric Series Sum Calculator", "Sum of Squares of N Natural Numbers", "Harmonic Series", "Digits Count", "Square Pattern", "Pyramid Pattern", "Swap the Digits", "Perfect Cubes", "Roman Numerals", "Sum of N Odd and Even Numbers", "Detecting Narcissistic Numbers", "Digit Sum Calculator", "Alphabet Triangle Generator", "Finding the Next Palindrome", "Finding Consecutive Palindromic Numbers", "Generating Palindromic Right-Angled Triangle", "The Palindromic Sum", "Pattern Printing with Multiples of 5", "Squares of Even Numbers & Odd Number Series", "Prime Pattern", "LCM Finder", "The Perfect Number Detective", "Handshake Simulation Program", "Odd or Even Numbers Series", "Digit Summation", "Vowel Counter", "Digit Incrementer", "Printing Pattern in Reverse Order", "The Odd Factorial Quest", "Series Expansion", "Fibonacci Even Number Generator", "Exploring the Growth Series", "Sum of All Prime Factors", "Sum N Odd Natural Numbers", "Check Second Even Number", "Floyd's Triangle", "Automorphic Number", "Sum of First and Last Digit", "Sum of Even Numbers", "XOR Operations", "Sum of the Middle Digits", "Reverse the Digits", "Perfect Square", "Alphabetical Pattern", "Multiples of 5 \u2014 Pattern Printing", "Product of N Digits", "Prime Number in Range", "Harshad Number", "Strong Number"];
-const ALIAS={"Smallest 5 Primes Greater Than N": "Smallest Prime Number", "Leap and Non-Leap Years": "Count the Number of Leap and Non-Leap Years", "Geometric Series Sum": "Geometric Series Sum Calculator", "Sum of Odd and Even Numbers up to N": "Sum of N Odd and Even Numbers", "Narcissistic Numbers": "Detecting Narcissistic Numbers", "Palindromic Right-Angled Triangle": "Generating Palindromic Right-Angled Triangle", "Consecutive Palindromic Numbers": "Finding Consecutive Palindromic Numbers", "Multiples of 5 Pattern": "Pattern Printing with Multiples of 5", "Squares of Even or Odd Numbers": "Squares of Even Numbers & Odd Number Series", "Handshake Simulation": "Handshake Simulation Program", "Sum of N Odd Natural Numbers": "Sum N Odd Natural Numbers", "Prime Numbers in a Range": "Prime Number in Range"};
-const T3=["Average of an Array", "Finding Maximum / Largest Number", "Peak Element", "Left Rotation", "Right Rotation", "Number of Occurrence of a Number", "Sum and Product of an Array", "Square of Array Elements", "Difference Between Maximum and Minimum", "Number of Elements Divisible by a Number", "Removing Duplicate Elements", "Negative Elements", "Positive Elements", "Deleting an Element at a Position", "Sum of Duplicate Elements", "Non-Prime Numbers", "Sum of First, Second, Last and Last-Before Elements", "Printing Unique Numbers", "Second Largest Number", "Ascending Order", "Removing Even Numbers", "Removing First Occurrence of a Number", "Pair Whose Sum Is Closest to Zero", "Median", "Chunk Size", "Inserting an Element at a Particular Position", "Find Frequency of Elements", "Deleting Duplicate Elements (Keep First Occurrence)", "Merge Two Arrays and Sort in Ascending Order", "Reverse Array Elements", "Print Even and Odd Numbers in Separate Arrays", "Searching an Element and Printing Its Position", "Question Missing in the Original PDF", "Find a Pair with a Given Sum", "Removing the First Occurrence of a Number", "Sum of Neighbour Peak Elements", "Swapping Two Elements", "Sorted or Not Sorted", "Sort Ascending, Even Numbers First and Odd Numbers Next", "Removing the Occurrence of a Digit", "Product of an Array Without Multiplying the Present Index", "How Many Numbers Are Smaller Than the Current Number?", "Ranking", "Removing Even Numbers at Even Indices", "Removing Elements Greater Than a Given Number", "Last Repeated Element", "Elements Greater Than All Elements to Their Right", "Maximum Sum of Array Elements", "Sum of Non-Repeated Numbers", "Left Character Rotation", "Print Indices of Pairs That Give the Target Sum", "Converting Angle to Radian"];
-// ===== Level 3 (Arrays) — AI-authored questions, review required =====
-const rng=seed=>{let s=seed;return()=>(s=(s*1103515245+12345)%2147483648)/2147483648};
-function AQ(t,task,o,core){const inp=[];
- for(let i=0;i<7;i++){const r=rng(97+i*31+t.length),n=5+(i%4),a=[];
-  while(a.length<n){const v=o.lo+Math.floor(r()*(o.hi-o.lo+1));if(o.dup||!a.includes(v))a.push(v)}
-  let s=n+"\n"+a.join(" ");if(o.ex)s+="\n"+o.ex(r,n,a,i);inp.push(s)}
- const f=x=>{const L=x.split("\n"),a=L[1].trim().split(/\s+/).map(Number);return core(a,L[2]!=null?+L[2]:null)};
- return{t,sc:"AI-authored question (review required): the original PDF text for this question was not supplied.",task:task+" Input: first line n, second line n integers"+(o.exn?", third line "+o.exn:"")+".",con:[],s:inp[0],s2:inp[1],h:inp.slice(2),f,ai:1}}
-const sum=a=>a.reduce((x,y)=>x+y,0);
-const AQS=[
-AQ(T3[0],"Print the average of the array elements with 2 decimal places.",{lo:-5,hi:30},a=>(sum(a)/a.length).toFixed(2)),
-AQ(T3[1],"Print the largest number in the array.",{lo:-20,hi:50},a=>String(Math.max(...a))),
-AQ(T3[2],"Print every peak element (greater than its neighbours; an end element only needs to beat its single neighbour), separated by spaces.",{lo:1,hi:60},a=>a.filter((v,i)=>(i===0||v>a[i-1])&&(i===a.length-1||v>a[i+1])).join(" ")),
-AQ(T3[3],"Rotate the array to the left by k positions and print it.",{lo:1,hi:60,exn:"k",ex:(r,n)=>1+Math.floor(r()*(n-1))},(a,k)=>a.slice(k).concat(a.slice(0,k)).join(" ")),
-AQ(T3[4],"Rotate the array to the right by k positions and print it.",{lo:1,hi:60,exn:"k",ex:(r,n)=>1+Math.floor(r()*(n-1))},(a,k)=>a.slice(-k).concat(a.slice(0,-k)).join(" ")),
-AQ(T3[5],"Print how many times the number x occurs in the array.",{lo:1,hi:4,dup:1,exn:"x",ex:(r,n,a)=>a[Math.floor(r()*n)]},(a,x)=>String(a.filter(v=>v===x).length)),
-AQ(T3[6],"Print the sum of the elements on the first line and their product on the second line.",{lo:-3,hi:5},a=>sum(a)+"\n"+a.reduce((x,y)=>x*y,1)),
-AQ(T3[7],"Print the square of every element, separated by spaces.",{lo:-9,hi:12},a=>a.map(v=>v*v).join(" ")),
-AQ(T3[8],"Print the difference between the maximum and the minimum element.",{lo:-30,hi:60},a=>String(Math.max(...a)-Math.min(...a))),
-AQ(T3[9],"Print how many elements are divisible by d.",{lo:1,hi:40,exn:"d",ex:r=>2+Math.floor(r()*4)},(a,d)=>String(a.filter(v=>v%d===0).length)),
-AQ(T3[10],"Remove every element that appears more than once and print the remaining elements in order. Print empty if nothing remains.",{lo:1,hi:7,dup:1},a=>{const o=a.filter(v=>a.filter(w=>w===v).length===1);return o.length?o.join(" "):"empty"}),
-AQ(T3[11],"Print the negative elements in their original order, or none if there are no negative elements.",{lo:-8,hi:8},a=>{const o=a.filter(v=>v<0);return o.length?o.join(" "):"none"}),
-AQ(T3[12],"Print the positive elements in their original order, or none if there are no positive elements.",{lo:-8,hi:8},a=>{const o=a.filter(v=>v>0);return o.length?o.join(" "):"none"}),
-AQ(T3[13],"Delete the element at position pos (1-based) and print the remaining array. If pos is outside 1..n print invalid position.",{lo:1,hi:60,exn:"pos",ex:(r,n,a,i)=>i%3===2?n+2:1+Math.floor(r()*n)},(a,p)=>p<1||p>a.length?"invalid position":a.filter((_,i)=>i!==p-1).join(" "))
-];
-const C2=OFF.map(name=>{const old=Object.keys(ALIAS).find(k=>ALIAS[k]===name)||name,q=Q.find(x=>x.t===old);if(!q)throw new Error("Missing question: "+name);return Object.assign({},q,{t:name})});
-const C3=T3.map((t,i)=>AQS[i]||{t,pending:1,missing:i===32});
-// ===== helpers =====
-const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const norm=s=>String(s).split("\n").map(l=>l.replace(/\s+$/,"")).join("\n").trim();
-const ex=(q,x)=>{const o=q.f(x);return q.keep?o:o.split("\n").map(l=>l.replace(/\.$/,"").toLowerCase()).join("\n")};
-const extra=x=>/^[A-Za-z]+$/.test(x.trim())?x.trim().split("").reverse().join(""):x.replace(/-?\d+/g,m=>String(+m+1));
-const tests=q=>{if(q.s2!=null)return{op:[q.s,q.s2],hd:q.h};const used=[q.s,...q.h];let e=extra(q.s),k=0;while(used.includes(e)&&k++<6)e=extra(e);return{op:[q.s,q.h[0]],hd:[...q.h.slice(1),e]}};
-const TY={"%d":"int","%ld":"long","%f":"float","%lf":"double","%c":"char"};
-function prep(c){return c.replace(/main\s*\(\s*void\s*\)/g,"main()").replace(/scanf\s*\(\s*"(%d|%ld|%f|%lf|%c)"\s*,\s*(?:&\s*(\w+)\s*\[([^\]]+)\]|(\w+)\s*\+\s*(\w+))\s*\)/g,(m,f,a,i,b,j)=>"{ "+TY[f]+" __t; scanf(\""+f+"\", &__t); "+(a||b)+"["+(i||j)+"] = __t; }")}
-const TPL="#include <stdio.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    \n    return 0;\n}\n";
-const CATS={c2:{name:"C LEVEL 2",desc:"C Programming Level 2 Assessment",qs:C2},c3:{name:"C LEVEL 3",desc:"C Programming Level 3 Assessment (Arrays)",qs:C3}};
-const nLv=c=>Math.ceil(CATS[c].qs.length/2);
-const qAt=(c,l)=>[CATS[c].qs[2*l-2],CATS[c].qs[2*l-1]].filter(Boolean);
-const ready=(c,l)=>qAt(c,l).every(q=>!q.pending);
-async function runC(code,input,limit=4000){let out="",d;
- try{d=JSCPP.run(prep(code),input,{debug:true,stdio:{write:t=>{out+=t}}})}catch(e){return{ok:false,out,err:String(e&&e.message||e),line:0,compile:true}}
- const t0=Date.now();let done;
- const bad=e=>{let L=0;try{const nn=d.nextNode();L=nn&&nn.sLine||0}catch(_){}return{ok:false,out,err:String(e&&e.message||e),line:L}};
- try{while(!done){for(let i=0;i<500&&!done;i++)done=d.next();if(!done){if(Date.now()-t0>limit)return{ok:false,out,err:"Time limit exceeded (possible infinite loop)",line:0};await new Promise(r=>setTimeout(r,0))}}}catch(e){return bad(e)}
- return{ok:true,out}}
-const errLine=r=>r.line||+((String(r.err).match(/line\s*(\d+)/i)||[])[1])||0;
-// ===== users / storage =====
-const HASH="c9cc16b9a2c2e88685fcb9d5260e2ec11d51773444f4a85445c1035263e0b960";
-const USER="vivinkg@email.com";
-let U=null,P=null,V="login",CUR="c2",tick=null,LVC="c2";
-async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-const key=()=>"gvp_"+U;
-function load(){try{P=JSON.parse(localStorage.getItem(key())||"null")}catch(e){P=null}P=P||{};["c2","c3"].forEach(c=>{P[c]=P[c]||{unlocked:1,done:{},att:null,hist:[]}});P.ipr=P.ipr||{ans:{},done:false};P.last=P.last||null}
-function save(){try{localStorage.setItem(key(),JSON.stringify(P))}catch(e){} }
-const app=$("app");
-const foot='<div class="ft">Developed by Vivin🖤</div>';
-function modal(msg,btns){const m=document.createElement("div");m.className="mod";m.innerHTML='<div class="mbox"><p>'+msg+'</p><div class="mb"></div></div>';btns.forEach(([t,fn,c])=>{const b=document.createElement("button");b.className="btn "+(c||"");b.textContent=t;b.onclick=()=>{m.remove();fn&&fn()};m.querySelector(".mb").appendChild(b)});document.body.appendChild(m)}
-function go(v,c){V=v;if(c)CUR=c;clearInterval(tick);document.body.classList.toggle("ex",v==="exam"||v==="ipr");window.onbeforeunload=(v==="exam"||v==="ipr")?e=>{e.preventDefault();e.returnValue=""}:null;render()}
-function topbar(extraHtml){return'<div class="top"><span class="logo">GV PORTAL</span>'+(extraHtml||"")+'<div class="sp"></div><span style="color:var(--mu);font-size:13px">'+esc(U||"")+'</span><button class="btn o" id="lo">Logout</button></div>'}
-function wireTop(){const b=$("lo");if(b)b.onclick=()=>{try{localStorage.removeItem("gvp_session")}catch(e){}U=null;P=null;go("login")}}
-// ===== render =====
-function render(){({login:rLogin,home:rHome,levels:rLevels,exam:rExam,result:rResult,ipr:rIpr})[V]()}
-function rLogin(){
- app.innerHTML='<div class="card login"><h1 style="letter-spacing:3px">GV PORTAL</h1><p>Welcome Back</p><label for="em">Email Address</label><input id="em" type="email" autocomplete="username"><label for="pw">Password</label><div class="pw"><input id="pw" type="password" autocomplete="current-password"><button id="tg" type="button">Show</button></div><div class="err" id="er"></div><button class="btn" id="si" style="width:100%;margin-top:6px">Sign In</button></div>'+foot;
- $("tg").onclick=()=>{const p=$("pw");p.type=p.type==="password"?"text":"password";$("tg").textContent=p.type==="password"?"Show":"Hide"};
- const sub=async()=>{const e=$("em").value.trim().toLowerCase(),p=$("pw").value;if(!e||!p){$("er").textContent="Enter your email and password.";return}
-  let h="";try{h=await sha(p)}catch(x){}
-  if(e===USER&&h===HASH){U=e;try{localStorage.setItem("gvp_session",e)}catch(x){}load();go("home")}else $("er").textContent="Incorrect email or password."};
- $("si").onclick=sub;$("pw").onkeydown=e=>{if(e.key==="Enter")sub()}}
-function cprog(c){const p=P[c],d=Object.keys(p.done).length;return"Level "+p.unlocked+" unlocked · "+d+" / "+nLv(c)+" levels completed"+(p.att?" · Level "+p.att.l+" in progress":"")}
-function rHome(){
- const ia=Object.keys(P.ipr.ans).filter(k=>P.ipr.ans[k]).length;
- app.innerHTML=topbar('<span style="color:var(--mu);font-size:13px">Progress: C2 '+Object.keys(P.c2.done).length+'/'+nLv("c2")+' · C3 '+Object.keys(P.c3.done).length+'/'+nLv("c3")+'</span>')+'<div class="wrap"><h2>Tests</h2><div class="cards">'+
- ["c2","c3"].map(c=>'<div class="card"><h2>'+CATS[c].name+'</h2><p>'+CATS[c].desc+'</p><div class="prog">'+cprog(c)+'</div><button class="btn" data-c="'+c+'">View Levels</button></div>').join("")+
- '<div class="card"><h2>IPR PATENT SEARCH</h2><p>Intellectual Property Rights and Patent Search Assessment</p><div class="prog">'+(P.ipr.done?"Completed":ia?"In Progress ("+ia+" answers saved)":"Not started")+'</div><button class="btn" id="ipr">'+(P.ipr.done?"New Test":ia?"Continue Test":"Start Test")+'</button></div></div></div>'+foot;
- wireTop();app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{LVC=b.dataset.c;go("levels",LVC)});$("ipr").onclick=()=>{if(P.ipr.done||!P.ipr.set)newIprSet();go("ipr")}}
-function lvStatus(c,l){const p=P[c];if(p.done[l]!=null)return"Completed";if(p.att&&p.att.l===l)return"In Progress";return l<=p.unlocked?"Unlocked":"Locked"}
-function rLevels(){const c=LVC,n=nLv(c),pend=CATS[c].qs.filter(q=>q.pending).length;
- let h=topbar('<span>'+CATS[c].name+'</span><span style="color:var(--mu);font-size:13px">'+cprog(c)+'</span>')+'<div class="wrap"><button class="btn o" id="bk">← Home</button>';
- if(c==="c3")h+='<div class="warn">Admin notice: C Level 3 Question 33 is blank in the supplied list and is held. '+pend+' of 52 questions still have no content, so only levels with both questions available can start. Questions marked AI-authored need review.</div>';
- h+='<div class="lv">';
- for(let l=1;l<=n;l++){const s=lvStatus(c,l),ok=ready(c,l),tag=s.replace(" ","");
-  h+='<div class="lc"><b>Level '+l+'</b><br><span class="tag '+tag+'">'+s+'</span>'+(P[c].done[l]!=null?' <small>Score '+P[c].done[l]+'</small>':"")+'<br>';
-  if(!ok)h+='<button class="btn" disabled>Content pending</button>';
-  else if(s==="Locked")h+='<button class="btn" disabled>Locked</button>';
-  else h+='<button class="btn" data-l="'+l+'">'+(s==="In Progress"?"Continue Test":s==="Completed"?"Retry Level":"Start Test")+'</button>';
-  h+='</div>'}
- app.innerHTML=h+'</div></div>'+foot;wireTop();$("bk").onclick=()=>go("home");
- app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{const l=+b.dataset.l;if(lvStatus(c,l)==="In Progress")resume(c);else startAtt(c,l)})}
-function fs(){try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}catch(e){}}
-function startAtt(c,l){const q=[2*l-2,2*l-1].filter(i=>CATS[c].qs[i]).sort(()=>Math.random()-.5);P[c].att={l,qs:q,code:{},res:{},cur:0,end:Date.now()+30*60000};save();fs();go("exam",c)}
-function resume(c){fs();go("exam",c)}
-// ===== exam =====
-const AC="printf scanf main int char float double void if else for while do switch case break continue return include #include stdio.h string.h strlen strcmp strcpy sizeof long short unsigned struct typedef const array pointer".split(" ");
-const SN={"for":"for (int i = 0; i < n; i++) {\n    §\n}","while":"while (§) {\n    \n}","do":"do {\n    §\n} while ();","if":"if (§) {\n    \n}","else":"else {\n    §\n}","printf":'printf("§");',"scanf":'scanf("%d", &§);',"main":"int main(void) {\n    §\n    return 0;\n}","#include":"#include <stdio.h>","include":"#include <stdio.h>","switch":"switch (§) {\n    case 1:\n        break;\n    default:\n        break;\n}"};
-function wire(ta,gut,pop,run){
- const upd=()=>{gut.textContent=ta.value.split("\n").map((_,i)=>i+1).join("\n")};
- const ins=(t,s,e,c)=>{ta.setRangeText(t,s,e,"end");const p=s+(c==null?t.length:c);ta.setSelectionRange(p,p);ta.dispatchEvent(new Event("input"))};
- let sel=0,items=[],ws=0;
- const closeP=()=>{pop.style.display="none";items=[]};
- const openP=()=>{const p=ta.selectionStart,m=ta.value.slice(0,p).match(/[#\w.]+$/),w=m?m[0]:"";if(w.length<2){closeP();return}ws=p-w.length;items=AC.filter(k=>k.startsWith(w)&&k!==w).slice(0,8);sel=0;if(!items.length){closeP();return}pop.innerHTML=items.map((k,i)=>'<div class="'+(i?"":"on")+'" data-i="'+i+'">'+esc(k)+'</div>').join("");pop.style.display="block"};
- const acc=k=>{let t=SN[k]||k;const c=t.indexOf("§");t=t.replace("§","");ta.setRangeText(t,ws,ta.selectionStart,"end");const p=ws+(c<0?t.length:c);ta.setSelectionRange(p,p);closeP();ta.dispatchEvent(new Event("input"))};
- pop.onmousedown=e=>{const d=e.target.closest("[data-i]");if(d){e.preventDefault();acc(items[+d.dataset.i])}};
- ta.addEventListener("input",()=>{upd();openP()});ta.addEventListener("blur",()=>setTimeout(closeP,120));
- ta.addEventListener("scroll",()=>{gut.scrollTop=ta.scrollTop});
- const PR={"(":")","[":"]","{":"}",'"':'"',"'":"'"};
- ta.addEventListener("keydown",e=>{const v=ta.value,s=ta.selectionStart,en=ta.selectionEnd,k=e.key,pv=v[s-1],nx=v[s];
-  if(pop.style.display==="block"){
-   if(k==="ArrowDown"||k==="ArrowUp"){e.preventDefault();sel=(sel+(k==="ArrowDown"?1:items.length-1))%items.length;[...pop.children].forEach((c,i)=>c.className=i===sel?"on":"");return}
-   if(k==="Enter"||k==="Tab"){e.preventDefault();acc(items[sel]);return}
-   if(k==="Escape"){e.preventDefault();closeP();return}}
-  if(e.ctrlKey&&k==="Enter"){e.preventDefault();run();return}
-  if(e.ctrlKey&&(k==="s"||k==="S")){e.preventDefault();return}
-  if(k==="Tab"){e.preventDefault();ins("    ",s,en);return}
-  if(k==="Backspace"&&s===en&&PR[pv]&&PR[pv]===nx){e.preventDefault();ta.setRangeText("",s-1,s+1,"end");ta.dispatchEvent(new Event("input"));return}
-  if(PR[k]&&!e.ctrlKey&&!e.altKey){
-   if((k==='"'||k==="'")&&nx===k&&s===en){e.preventDefault();ta.setSelectionRange(s+1,s+1);return}
-   if((k==='"'||k==="'")&&/\w/.test(pv||""))return;
-   e.preventDefault();
-   if(s!==en){ta.setRangeText(k+v.slice(s,en)+PR[k],s,en,"end");ta.dispatchEvent(new Event("input"));return}
-   ins(k+PR[k],s,en,1);return}
-  if((k===")"||k==="]"||k==="}")&&s===en&&nx===k){e.preventDefault();ta.setSelectionRange(s+1,s+1);return}
-  if(k==="}"&&s===en){const ls=v.lastIndexOf("\n",s-1)+1,pre=v.slice(ls,s);if(pre.length>=4&&/^ +$/.test(pre)){e.preventDefault();ta.setRangeText("}",s-4,s,"end");ta.dispatchEvent(new Event("input"));return}}
-  if(k==="Enter"&&!e.ctrlKey){e.preventDefault();const ls=v.lastIndexOf("\n",s-1)+1,ind=(v.slice(ls,s).match(/^ */)||[""])[0];
-   if(pv==="{"&&nx==="}"){ins("\n"+ind+"    \n"+ind,s,en,ind.length+5);return}
-   ins("\n"+ind+(pv==="{"?"    ":""),s,en);return}});
- upd()}
-let WARN=0;
-document.addEventListener("visibilitychange",()=>{if(V==="exam"&&document.hidden)WARN++});
-function rExam(){const c=CUR,att=P[c].att;if(!att){go("levels");return}
- const qi=att.qs[att.cur],q=CATS[c].qs[qi],T=tests(q),rs=att.res[qi];
- if(att.code[qi]==null)att.code[qi]=TPL;
- const open=T.op.map((x,i)=>'<div class="given"><b>Open Test Case '+(i+1)+'</b><br>Input:<pre>'+esc(x)+'</pre>Expected Output:<pre>'+esc(ex(q,x))+'</pre></div>').join("");
- const sample='<h3>Sample Input</h3><pre>'+esc(q.s)+'</pre><h3>Sample Output</h3><pre>'+esc(ex(q,q.s))+'</pre>';
- app.innerHTML='<div class="exam"><div class="top"><span class="logo">GV PORTAL</span><span>'+CATS[c].name+' · Level '+att.l+' · Program '+(att.cur+1)+' of '+att.qs.length+'</span><div class="sp"></div><b id="tm" style="color:var(--ac)">30:00</b><button class="btn o" id="ex">Save &amp; Exit</button><button class="btn r" id="fin">Finish Test</button></div>'+
- '<div class="split"><div class="pl"><h2>'+esc(q.t)+'</h2>'+(q.ai?'<div class="warn">AI-authored question, review required.</div>':"")+'<h3>Problem</h3><p>'+esc(q.sc)+'</p><p>'+esc(q.task)+'</p>'+sample+'<h3>Public Test Cases</h3>'+open+'<p style="color:var(--mu);font-size:13px">Five hidden test cases run on Submit.</p>'+foot+'</div>'+
- '<div class="pr"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn o" id="run">Run Code</button><button class="btn" id="sub">Submit</button><span style="flex:1"></span><button class="btn o" id="pv"'+(att.cur?"":" disabled")+'>Previous</button><button class="btn o" id="nx"'+(att.cur<att.qs.length-1&&rs&&rs.completed?"":" disabled")+'>Next</button></div>'+
- '<div class="ed"><pre id="gut">1</pre><textarea id="code" spellcheck="false" wrap="off"></textarea><div class="ac" id="pop"></div></div>'+
- '<div class="bot"><h3 style="margin:0">Custom Input</h3><textarea id="cin" spellcheck="false"></textarea><h3 style="margin:0">Output</h3><pre id="out" style="min-height:34px"></pre><div id="er" style="font-size:14px"></div><div id="rs">'+resBox(rs)+'</div></div></div></div></div>';
- const ta=$("code");ta.value=att.code[qi];$("cin").value=q.s;
- ta.oninput=()=>{att.code[qi]=ta.value;save()};
- const run=async()=>{$("out").textContent="Running...";$("er").textContent="";const r=await runC(ta.value,$("cin").value);$("out").textContent=r.out||"";
-  if(!r.ok){const L=errLine(r);$("er").textContent=L?"Error in line "+L:String(r.err).replace(/^ERROR:\s*/,"").split("\n").filter(Boolean)[0]||"Error";
-   if(L){const ls=ta.value.split("\n");let s=0;for(let i=0;i<L-1;i++)s+=ls[i].length+1;ta.focus();ta.setSelectionRange(s,s+(ls[L-1]||"").length)}}};
- wire(ta,$("gut"),$("pop"),run);$("run").onclick=run;$("sub").onclick=()=>submitQ();
- $("pv").onclick=()=>{att.cur--;save();render()};$("nx").onclick=()=>{att.cur++;save();render()};
- $("ex").onclick=()=>{save();try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}go("levels",c)};
- $("fin").onclick=()=>modal("Are you sure you want to finish this test?",[["Continue Test",null,"o"],["Finish Test",()=>finish(c),"r"]]);
- tick=setInterval(()=>{const ms=att.end-Date.now();if(ms<=0){finish(c);return}const t=$("tm");if(t)t.textContent=String(Math.floor(ms/60000)).padStart(2,"0")+":"+String(Math.floor(ms/1000)%60).padStart(2,"0")},500)}
-function resBox(r){if(!r)return"";const sc=(r.cerr!=null&&r.cerr!==false&&r.cerr!==0&&typeof r.cerr==="number")?r.cerr:0;
- return'<div class="tc">Compilation: '+(r.cerr?'<span class="f">Failed'+(r.cerr>0?' (line '+r.cerr+')':'')+'</span>':'<span class="p">Successful</span>')+'</div>'+
- r.op.map((p,i)=>'<div class="tc">Open Test Case '+(i+1)+': <span class="'+(p?"p":"f")+'">'+(p?"Passed":"Failed")+'</span></div>').join("")+
- '<div class="tc">Hidden Test Cases: <b>'+r.hp+'/5 Passed</b></div><div class="tc">Score: <b>'+r.score+' / 100</b> '+(r.completed?'<span class="p">· Completed</span>':"")+'</div>'}
-async function submitQ(){const c=CUR,att=P[c].att,qi=att.qs[att.cur],q=CATS[c].qs[qi],T=tests(q),code=att.code[qi]||TPL,b=$("sub");b.disabled=true;$("rs").innerHTML='<div class="tc">Running 7 test cases...</div>';
- const op=[],hd=[];let cerr=0;
- for(const x of T.op){const o=await runC(code,x);if(o.compile&&!cerr)cerr=errLine(o)||-1;op.push(o.ok&&norm(o.out)===norm(ex(q,x)));if(cerr)break}
- if(cerr){while(op.length<2)op.push(false);for(let i=0;i<5;i++)hd.push(false)}else for(const x of T.hd){const o=await runC(code,x);hd.push(o.ok&&norm(o.out)===norm(ex(q,x)))}
- const hp=hd.filter(Boolean).length,score=op.filter(Boolean).length*10+hp*16,pr=att.res[qi];
- att.res[qi]={score:Math.max(pr?pr.score:0,score),completed:!!(pr&&pr.completed)||hp===5,op,hp,cerr,last:score};
- att.res[qi].score=Math.max(pr?pr.score:0,score);save();render()}
-function finish(c){const att=P[c].att;if(!att)return;const R0=i=>att.res[i]||{},sc=att.qs.map(i=>R0(i).score||0),score=Math.round(sum(sc)/att.qs.length);
- const comp=att.qs.every(i=>R0(i).completed),elig=comp&&score>=90;
- const R={c,l:att.l,score,elig,at:Date.now(),progs:att.qs.map(i=>({t:CATS[c].qs[i].t,score:R0(i).score||0,op:R0(i).op||[false,false],hp:R0(i).hp||0,cerr:R0(i).cerr||0,completed:!!R0(i).completed}))};
- if(elig){P[c].done[att.l]=score;P[c].unlocked=Math.max(P[c].unlocked,Math.min(nLv(c),att.l+1))}
- P[c].hist.push(R);P[c].att=null;P.last=R;save();try{document.fullscreenElement&&document.exitFullscreen()}catch(e){}go("result",c)}
-function rResult(){const R=P.last,c=R.c;
- const rev=R.score===90?'<h3 style="color:#000">Detailed Review</h3>'+R.progs.map(p=>'<p><b>'+esc(p.t)+'</b><br>Open tests passed: '+p.op.filter(Boolean).length+'/2 · Hidden tests passed: '+p.hp+'/5'+(p.cerr?'<br>Compilation error'+(p.cerr>0?' near line '+p.cerr:""):"")+(p.hp<5&&!p.cerr?'<br>Mistake: output differs from the expected result on '+(5-p.hp)+' hidden case(s). Re-check edge cases and the exact output text.':"")+(p.op.includes(false)&&!p.cerr?'<br>Mistake: a public test case failed. Compare your output with the expected output.':"")+'</p>').join(""):"";
- app.innerHTML=topbar()+'<div class="res '+(R.elig?"ok":"")+'"><h2>'+CATS[c].name+' · Level '+R.l+'</h2><p class="big">'+(R.elig?"PASS":"FAIL")+' — Eligibility: '+(R.elig?"YES":"NO")+'</p><p>Total Score: <b>'+R.score+' / 100</b> · Percentage: <b>'+R.score+'%</b></p><p>Programs completed: '+R.progs.filter(p=>p.completed).length+'/'+R.progs.length+'<br>Public test cases passed: '+sum(R.progs.map(p=>p.op.filter(Boolean).length))+'/'+R.progs.length*2+'<br>Hidden test cases passed: '+sum(R.progs.map(p=>p.hp))+'/'+R.progs.length*5+'<br>Compilation errors: '+R.progs.filter(p=>p.cerr).length+'</p>'+rev+'<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">'+(R.elig?(R.l<nLv(c)&&ready(c,R.l+1)?'<button class="btn" id="nl">Continue to Next Level</button>':""):'<button class="btn" id="rt">Retry Level</button>')+'<button class="btn o" id="hm">Return to Home</button></div></div>'+foot;
- wireTop();$("hm").onclick=()=>go("home");if($("nl"))$("nl").onclick=()=>startAtt(c,R.l+1);if($("rt"))$("rt").onclick=()=>startAtt(c,R.l)}
-// ===== IPR =====
-function genIpr(){const idx=[...Array(PL.length).keys()].sort(()=>Math.random()-.5),cp=idx.filter(i=>PL[i][4]).slice(0,3),rest=idx.filter(i=>!cp.includes(i)),dbs=["G","E"];let n=1;
- const B=rest.slice(0,4).map(i=>PL[i]),C=rest.slice(4,7).map(i=>PL[i]),E=rest.slice(7,10).map(i=>PL[i]),Dd=cp.map(i=>PL[i]);
- return{B:B.map((p,j)=>({n:n++,db:dbs[j%2],given:["Patent Application: "+p[0]],f:[dt,st,gr,ti]})),
- C:C.map((p,j)=>({n:n++,db:dbs[j%2],given:["Inventor: "+p[2],"Grant date: "+p[1],"Title description: "+p[3]],f:[an,ti,st]})),
- D:Dd.map((p,j)=>({n:n++,db:dbs[j%2],given:["CPC Classification code: "+p[4],"Country of origin: US","Publication date range: "+p[1]+" : "+p[1],"Hint: "+p[3]],f:[tp,ap,st]})),
- E:E.map((p,j)=>({n:n++,db:dbs[(j+1)%2],given:["Inventor: "+p[2],"Publication date: "+p[1],"Hint: Patent about "+p[3]+"."],f:[dn,ap,at,st]}))}}
-function newIprSet(){P.ipr={ans:{},done:false,set:genIpr(),id:Math.floor(1000+Math.random()*9000),tab:"G",sec:"A"};save()}
-function rIpr(){if(!P.ipr.set)newIprSet();let cur=P.ipr.tab||"G",sec=P.ipr.sec||"A";const S=P.ipr.set,IQ=[...S.B,...S.C,...S.D,...S.E];
- const ans=P.ipr.ans,done=q=>q.f.every((f,i)=>ans["q"+q.n+"_"+i]),ks=Object.keys(D);
- const qh=q=>'<div class="given"><b>'+q.n+']</b> '+q.given.map(esc).join("<br>")+'<br><i>Database: '+D[q.db][0]+'</i>'+q.f.map((f,i)=>{const k="q"+q.n+"_"+i,v=esc(ans[k]||"");return'<div class="fld"><label>'+esc(f[0])+'</label>'+(f[1]==="s"?'<select data-k="'+k+'"><option value="">Select</option>'+["FILED","PUBLISHED","GRANTED"].map(o=>'<option'+(ans[k]===o?" selected":"")+'>'+o+'</option>').join("")+'</select>':'<input data-k="'+k+'" data-t="'+f[1]+'" value="'+v+'" autocomplete="off">')+'</div>'}).join("")+'</div>';
- const body=sec==="A"?'<h2>Section A – Patent Search Websites</h2><p style="color:var(--mu)">Use the database named in each question. Open a site on the right, then answer Sections B to E.</p><div class="lv">'+ks.map((k,i)=>'<div class="lc"><b>'+D[k][0]+'</b><p style="color:var(--mu);font-size:13px;margin:6px 0 10px">'+esc(tools[i][2])+'</p><button class="btn" data-d="'+k+'">Open on right</button></div>').join("")+'</div>':'<h2>Section '+sec+'</h2>'+S[sec].map(qh).join("");
- app.innerHTML='<div class="exam"><div class="top"><span class="logo">GV PORTAL</span><span>IPR PATENT SEARCH</span><span id="cnt" style="color:var(--mu)"></span><div class="sp"></div><button class="btn o" id="nq">New Question Set</button><button class="btn o" id="ex">Save &amp; Exit</button><button class="btn r" id="fin">Finish Test</button></div><div class="split"><div class="pl"><div class="tabs" style="margin-bottom:12px;flex-wrap:wrap">'+["A","B","C","D","E"].map(x=>'<button data-s="'+x+'" class="'+(x===sec?"on":"")+'">Section '+x+'</button>').join("")+'</div>'+body+foot+'</div>'+
- '<div class="pr"><div class="tabs">'+ks.map(k=>'<button data-d="'+k+'" class="'+(k===cur?"on":"")+'">'+D[k][0]+'</button>').join("")+'</div><div class="warn" style="margin:0">If the page stays blank, the site blocks embedding. Use the link to open it in a new tab. Your answers stay saved here. <a target="_blank" rel="noopener" href="'+D[cur][1]+'" style="color:#6b4e00">Open '+D[cur][0]+' ↗</a></div><iframe id="fr" src="'+D[cur][1]+'" referrerpolicy="no-referrer"></iframe></div></div></div>';
- const cnt=()=>{$("cnt").textContent="Set #"+P.ipr.id+" · "+IQ.filter(done).length+" / "+IQ.length+" answered"};cnt();
- app.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",()=>{if(el.dataset.t==="u")el.value=el.value.toUpperCase();ans[el.dataset.k]=el.value;save();cnt()}));
- app.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{P.ipr.tab=b.dataset.d;save();rIpr()});
- app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{P.ipr.sec=b.dataset.s;save();rIpr();const p=app.querySelector(".pl");if(p)p.scrollTop=0});
- $("ex").onclick=()=>go("home");
- $("nq").onclick=()=>modal("Generate a new set of questions? Current answers will be cleared.",[["Cancel",null,"o"],["New Question Set",()=>{newIprSet();rIpr()},"r"]]);
- $("fin").onclick=()=>modal("Finish the IPR Patent Search test? Answers are saved. Auto-grading is not available because no answer key was supplied.",[["Continue Test",null,"o"],["Finish Test",()=>{P.ipr.done=true;save();go("home")},"r"]])}
-// ===== start =====
-try{const s=localStorage.getItem("gvp_session");if(s===USER){U=s;load();V="home"}}catch(e){}
-render();
+    html {
+      color-scheme: light;
+      height: 100%
+    }
 
-</script></body></html>
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--tx);
+      font: 15px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif
+    }
+
+    body.ex {
+      overflow: hidden;
+      height: 100%
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0
+    }
+
+    h3 {
+      font-size: 14px;
+      color: var(--ac);
+      margin: 14px 0 6px
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+      color: var(--tx)
+    }
+
+    .btn {
+      background: var(--ac);
+      color: #fff;
+      border: 0;
+      padding: 9px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600
+    }
+
+    .btn.o {
+      background: #fff;
+      color: var(--ac);
+      border-color: var(--ac);
+      border: 1px solid var(--bd)
+    }
+
+    .btn.r {
+      background: var(--bad);
+      color: #fff
+    }
+
+    .btn:disabled {
+      opacity: .4;
+      cursor: not-allowed
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 22px;
+      background: var(--c1);
+      border-bottom: 1px solid var(--bd);
+      flex-wrap: wrap
+    }
+
+    .top .sp {
+      flex: 1
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 2px;
+      font-size: 18px
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 26px 22px
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px
+    }
+
+    .card {
+      background: var(--c1);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 22px
+    }
+
+    .card p {
+      color: var(--mu);
+      margin: 6px 0 14px
+    }
+
+    .prog {
+      color: var(--ok);
+      font-size: 13px;
+      margin-bottom: 14px
+    }
+
+    .lv {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .lc {
+      background: var(--c1);
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      padding: 14px
+    }
+
+    .lc b {
+      font-size: 16px
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 9px;
+      border-radius: 99px;
+      margin: 6px 0 10px;
+      border: 1px solid var(--bd)
+    }
+
+    .tag.Completed {
+      color: var(--ok);
+      border-color: var(--ok)
+    }
+
+    .tag.Unlocked {
+      color: var(--ac);
+      border-color: var(--ac)
+    }
+
+    .tag.InProgress {
+      color: #b7791f;
+      border-color: #b7791f
+    }
+
+    .tag.Locked {
+      color: var(--mu)
+    }
+
+    .lc .btn {
+      width: 100%;
+      margin-top: 4px
+    }
+
+    .ft {
+      text-align: center;
+      color: var(--mu);
+      font-size: 13px;
+      padding: 20px
+    }
+
+    .login {
+      max-width: 380px;
+      margin: 9vh auto;
+      padding: 30px
+    }
+
+    .login label {
+      display: block;
+      margin: 14px 0 5px;
+      color: var(--mu);
+      font-size: 13px
+    }
+
+    .login input {
+      width: 100%;
+      padding: 10px 12px;
+      background: var(--c2);
+      border: 1px solid var(--bd);
+      border-radius: 7px
+    }
+
+    .pw {
+      position: relative
+    }
+
+    .pw button {
+      position: absolute;
+      right: 6px;
+      top: 5px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: var(--mu)
+    }
+
+    .err {
+      color: var(--bad);
+      font-size: 13px;
+      margin-top: 10px;
+      min-height: 18px
+    }
+
+    .exam {
+      height: 100vh;
+      display: flex;
+      flex-direction: column
+    }
+
+    .split {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      min-height: 0
+    }
+
+    .pl {
+      overflow: auto;
+      padding: 16px 20px;
+      border-right: 1px solid var(--bd)
+    }
+
+    .pr {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 12px;
+      gap: 8px;
+      overflow: hidden
+    }
+
+    pre {
+      margin: 0;
+      background: var(--c2);
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      padding: 8px 10px;
+      font: 13px Consolas, "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto
+    }
+
+    .ed {
+      flex: 1;
+      display: flex;
+      min-height: 170px;
+      position: relative;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--c2)
+    }
+
+    .ed pre {
+      border: 0;
+      border-radius: 0;
+      background: #f1eefc;
+      color: var(--mu);
+      text-align: right;
+      overflow: hidden;
+      white-space: pre;
+      min-width: 38px
+    }
+
+    .ed textarea {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      resize: none;
+      outline: 0;
+      padding: 8px 10px;
+      font: 13px/1.5 Consolas, "Courier New", monospace;
+      white-space: pre;
+      overflow: auto;
+      tab-size: 4
+    }
+
+    .ed pre {
+      line-height: 1.5;
+      padding: 8px 8px
+    }
+
+    .ac {
+      position: absolute;
+      left: 46px;
+      bottom: 6px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      display: none;
+      z-index: 4;
+      min-width: 160px;
+      font: 13px Consolas, monospace
+    }
+
+    .ac div {
+      padding: 4px 12px;
+      cursor: pointer
+    }
+
+    .ac .on {
+      background: var(--ac);
+      color: #fff
+    }
+
+    .bot {
+      max-height: 42%;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .bot textarea {
+      width: 100%;
+      height: 56px;
+      background: var(--c2);
+      border: 1px solid var(--bd);
+      border-radius: 7px;
+      padding: 6px 8px;
+      font: 13px Consolas, monospace
+    }
+
+    .tc {
+      padding: 6px 10px;
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      margin: 4px 0;
+      font-size: 13.5px;
+      background: var(--c1)
+    }
+
+    .p {
+      color: var(--ok);
+      font-weight: 700
+    }
+
+    .f {
+      color: var(--bad);
+      font-weight: 700
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px
+    }
+
+    .tabs button {
+      background: var(--c2);
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer
+    }
+
+    .tabs .on {
+      background: var(--ac);
+      color: #fff
+    }
+
+    .mod {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 20, 43, .45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50
+    }
+
+    .mbox {
+      background: var(--c1);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 22px;
+      max-width: 420px
+    }
+
+    .mb {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 16px
+    }
+
+    .res {
+      background: #fff;
+      color: #000;
+      border-radius: 12px;
+      padding: 28px;
+      max-width: 640px;
+      margin: 30px auto;
+      border-left: 8px solid var(--bad)
+    }
+
+    .res.ok {
+      border-left-color: var(--ok)
+    }
+
+    .res h2,
+    .res p,
+    .res b {
+      color: #000
+    }
+
+    .res .big {
+      font-size: 34px;
+      font-weight: 800
+    }
+
+    .res .btn.o {
+      color: #000;
+      border-color: #999
+    }
+
+    .warn {
+      background: #fff7e0;
+      border: 1px solid #f0c14b;
+      color: #6b4e00;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 14px;
+      font-size: 13.5px
+    }
+
+    .fld {
+      display: grid;
+      grid-template-columns: minmax(120px, 170px) 1fr;
+      gap: 6px;
+      margin: 5px 0;
+      font-size: 13px;
+      align-items: center
+    }
+
+    .fld input,
+    .fld select {
+      background: var(--c2);
+      border: 1px solid var(--bd);
+      border-radius: 6px;
+      padding: 6px 8px;
+      width: 100%
+    }
+
+    .given {
+      background: var(--c2);
+      border-radius: 7px;
+      padding: 8px 10px;
+      margin: 8px 0;
+      font-size: 14px
+    }
+
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      background: #fff;
+      min-height: 200px
+    }
+
+    @media(max-width:860px) {
+      .split {
+        grid-template-columns: 1fr;
+        overflow: auto
+      }
+
+      .exam {
+        height: auto;
+        min-height: 100vh
+      }
+
+      body.ex {
+        overflow: auto
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="https://cdn.jsdelivr.net/npm/JSCPP@2.0.6/dist/JSCPP.es5.min.js"></script>
+  <script>
+    const num = s => s.trim().split(/\s+/).map(Number);
+    const rd = x => { let r = 0; while (x > 9) { r = 0; while (x > 0) { r += x % 10; x = Math.floor(x / 10) } x = r } return x };
+    const pf = n => { let s = 0; for (let p = 2; p <= n; p++)while (n % p === 0) { s += p; n /= p } return s };
+    const rom = n => { const m = [[40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]]; let r = ""; for (const [v, t] of m) while (n >= v) { r += t; n -= v } return r };
+    const gcd = (a, b) => b ? gcd(b, a % b) : a;
+    const isP = n => { if (n < 2) return false; for (let i = 2; i * i <= n; i++)if (n % i === 0) return false; return true };
+    const tri = (n, f) => { if (n <= 0) return "Invalid"; let k = 1, o = []; for (let i = 1; i <= n; i++) { let r = []; for (let j = 0; j < i; j++)r.push(k++); o.push(r.join(" ")) } return o.join("\n") };
+    const lp = y => y % 400 === 0 || (y % 4 === 0 && y % 100 !== 0);
+    const pal = n => { const t = String(n); return t === [...t].reverse().join("") };
+    const rows = (n, fn) => { const o = []; for (let i = 1; i <= n; i++)o.push(fn(i)); return o.join("\n") };
+    const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+    const Q = [
+      { t: "Fibonacci Series", sc: "A teacher wants to show students how the Fibonacci series grows. The first two terms are 0 and 1, and each next term is the sum of the previous two.", task: "Write a program that reads a positive integer n and prints the first n Fibonacci numbers, each followed by a comma. If n is not positive, print invalid input.", con: ["-100 ≤ n ≤ 40", "Print all numbers on one line, no spaces"], s: "5", h: ["4", "7", "-1", "11", "20"], f: x => { const n = +x; if (n <= 0) return "invalid input"; let a = 0, b = 1, o = ""; for (let i = 0; i < n; i++) { o += a + ",";[a, b] = [b, a + b] } return o } },
+      { t: "Prime or Composite Number", sc: "Alex finds an ancient book that opens only when a number is identified correctly as prime or composite.", task: "Read an integer n and print whether it is a prime or a composite number, in the format shown in the samples.", con: ["2 ≤ n ≤ 100000", "Output format: N is a prime number / N is a composite number"], s: "7", h: ["15", "50", "29", "97", "121"], f: x => { const n = +x; let p = n > 1; for (let i = 2; i * i <= n; i++)if (n % i === 0) p = false; return n + (p ? " is a prime number" : " is a composite number") } },
+      { t: "Abundant Number", sc: "In Mathville, Alex hunts for abundant numbers, whose proper divisors add up to more than the number itself.", task: "Read an integer n. Add all its proper divisors (excluding n). If the sum is greater than n print 'n is an abundant number', otherwise print 'n is not an abundant number'.", con: ["1 ≤ n ≤ 100000"], s: "12", h: ["18", "13", "24", "16", "30"], f: x => { const n = +x; let s = 0; for (let i = 1; i < n; i++)if (n % i === 0) s += i; return n + (s > n ? " is an abundant number" : " is not an abundant number") } },
+      { t: "Harmonic Series", sc: "A program must add the harmonic series 1 + 1/2 + 1/3 + ... up to the n-th term.", task: "Read a positive integer n and print the sum of the harmonic series up to n with 2 decimal places. If n is not positive, print invalid input.", con: ["-100 ≤ n ≤ 1000", "Use floating point division"], s: "10", h: ["4", "5", "24", "61", "-2"], f: x => { const n = +x; if (n <= 0) return "invalid input"; let s = 0; for (let i = 1; i <= n; i++)s += 1 / i; return s.toFixed(2) } },
+      { t: "Digits Count", sc: "A calculator company wants to show how many digits a number has.", task: "Read an integer (it may be negative or zero) and print the number of digits in it. Use a loop.", con: ["-10^9 < n < 10^9", "0 has 1 digit; ignore the minus sign"], s: "47580", h: ["78562453", "4521", "-2578963", "0", "-36528000"], f: x => String(Math.abs(+x)).length + "" },
+      { t: "Pyramid Pattern", sc: "Users enter the number of rows and expect a triangle of consecutive numbers starting from 1.", task: "Read the number of rows and print a pyramid where row i has i numbers, continuing from 1. For 0 or negative input print invalid.", con: ["-10 ≤ rows ≤ 20", "Numbers in a row are separated by a single space"], s: "4", h: ["3", "2", "0", "5", "6"], f: x => tri(+x) },
+      { t: "Perfect Cubes", sc: "A maths enthusiast wants the cubes of three consecutive numbers starting from a given number.", task: "Read an integer n. If n is positive, print the cubes of n, n+1 and n+2, each on a new line. Otherwise print invalid.", con: ["-100 ≤ n ≤ 1000"], s: "10", h: ["4", "1", "0", "7", "15"], f: x => { const n = +x; return n <= 0 ? "Invalid" : [n, n + 1, n + 2].map(v => v ** 3).join("\n") } },
+      { t: "Roman Numerals", keep: 1, sc: "A user interface must convert small numbers into Roman numerals.", task: "Read an integer and print its Roman numeral. Reference: I-1, IV-4, V-5, IX-9, X-10, XL-40. If the number is below 1 or above 40, print invalid input.", con: ["-100 ≤ n ≤ 100"], s: "37", h: ["16", "9", "40", "-7", "12"], f: x => { const n = +x; return n < 1 || n > 40 ? "invalid input" : rom(n) } },
+      { t: "Strong Number", sc: "A mathematician notices that some numbers equal the sum of the factorials of their digits.", task: "Read an integer n. If the sum of factorials of its digits equals n print 'n is a strong number', otherwise print 'n is not a strong number'", con: ["1 ≤ n ≤ 100000"], s: "123", h: ["345", "2567", "145", "45908", "40585"], f: x => { const n = +x, F = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]; const s = String(n).split("").reduce((a, d) => a + F[+d], 0); return n + (s === n ? " is a strong number" : " is not a strong number") } },
+      { t: "LCM Finder", sc: "A developer needs the least common multiple of two numbers.", task: "Read two integers. If any of them is negative print negative input, otherwise print their LCM.", con: ["-1000 ≤ a, b ≤ 1000", "a and b are given on one line"], s: "12 18", h: ["45 1", "45 4", "5 4", "5 7", "-1 -2"], f: x => { const [a, b] = num(x); return a < 0 || b < 0 ? "negative input" : String(a * b / gcd(a, b)) } },
+      { t: "Digit Summation", sc: "Milo keeps adding the digits of a number until only one digit is left.", task: "Read an integer and repeatedly sum its digits until the sum becomes a single digit. Print that digit.", con: ["1 ≤ n ≤ 10^9"], s: "9876", h: ["631", "440", "913", "66", "8456"], f: x => String(rd(+x)) },
+      { t: "Handshake Simulation", sc: "At a conference every person shakes hands with every other person exactly once.", task: "Read the number of people and print the total number of handshakes.", con: ["1 ≤ n ≤ 1000"], s: "6", h: ["8", "22", "15", "20", "45"], f: x => { const n = +x; return String(n * (n - 1) / 2) } },
+      { t: "Sum of All Prime Factors", sc: "An analyst wants to add all the prime factors of financial figures.", task: "Read an integer n and print the sum of its prime factors. A repeated prime factor is added each time it divides n (36 = 2×2×3×3, so the sum is 10).", con: ["2 ≤ n ≤ 100000"], s: "36", h: ["102", "46", "160", "78", "22"], f: x => String(pf(+x)) },
+      { t: "Smallest 5 Primes Greater Than N", sc: "At a village fair, children win a prize if they pick a prime number.", task: "Read an integer n and print the 5 smallest prime numbers greater than n, each on a new line.", con: ["1 ≤ n ≤ 10000"], s: "10", h: ["99", "20", "46", "132", "75"], f: x => { let o = []; for (let k = +x + 1; o.length < 5; k++)if (isP(k)) o.push(k); return o.join("\n") } },
+      { t: "Series Sum Calculator", sc: "A maths platform shows a series built by repeating a digit, such as 3 + 33 + 333.", task: "Read a digit d and the number of terms n. Print the series (terms separated by ' + ') on the first line and its sum on the second line.", con: ["1 ≤ d ≤ 9", "1 ≤ n ≤ 8"], s: "3 4", h: ["2 5", "1 6", "9 2", "7 4", "6 4"], f: x => { const [d, n] = num(x); let t = [], sm = 0; for (let i = 1; i <= n; i++) { t.push(String(d).repeat(i)); sm += +String(d).repeat(i) } return t.join(" + ") + "\n" + sm } },
+      { t: "Divisor Sum and Equality Checker", sc: "A mysterious code lists the divisors of a number and checks if their sum equals the number.", task: "Read n. Print its proper divisors (excluding n) separated by spaces, then their sum, then 'n is an equal number' or 'n is not an equal number'.", con: ["2 ≤ n ≤ 10000"], s: "42", h: ["28", "25", "496", "16", "78"], f: x => { const n = +x; let d = []; for (let i = 1; i < n; i++)if (n % i === 0) d.push(i); const sm = d.reduce((a, b) => a + b, 0); return d.join(" ") + "\n" + sm + "\n" + n + (sm === n ? " is an equal number" : " is not an equal number") } },
+      { t: "Geometric Series Sum", sc: "John adds the series 1 + 1/2 + 1/4 + 1/8 + ... where each term is half of the previous term.", task: "Read N and print the sum of the first N terms with 2 decimal places. For negative N print 0.00.", con: ["-100 ≤ N ≤ 50"], s: "6", h: ["4", "3", "7", "-7", "12"], f: x => { const n = +x; if (n < 0) return "0.00"; let s = 0, t = 1; for (let i = 0; i < n; i++) { s += t; t /= 2 } return s.toFixed(2) } },
+      { t: "Sum of Squares of N Natural Numbers", sc: "A program must add the squares of 1, 2, 3 ... up to N.", task: "Read a positive integer N and print 1² + 2² + ... + N². If N is 0 or negative print invalid input.", con: ["-100 ≤ N ≤ 1000"], s: "5", h: ["25", "12", "21", "72", "-5"], f: x => { const n = +x; if (n <= 0) return "invalid input"; let s = 0; for (let i = 1; i <= n; i++)s += i * i; return String(s) } },
+      { t: "Swap the Digits", sc: "Tom wants to swap the first and last digits of a number.", task: "Read a positive integer and print the number after swapping its first and last digits.", con: ["10 ≤ n ≤ 10^9", "The last digit is never 0 after the swap rule is applied to the given tests"], s: "12345", h: ["258714", "428571", "571428", "857142", "109876"], f: x => { const a = x.trim().split("");[a[0], a[a.length - 1]] = [a[a.length - 1], a[0]]; return a.join("") } },
+      { t: "Sum of Odd and Even Numbers up to N", sc: "Tom practices loops by adding odd and even numbers separately.", task: "Read n. Print the sum of all odd numbers from 1 to n on the first line and the sum of all even numbers from 1 to n on the second line.", con: ["1 ≤ n ≤ 1000"], s: "5", h: ["8", "4", "7", "15", "30"], f: x => { const n = +x; let o = 0, e = 0; for (let i = 1; i <= n; i++)i % 2 ? o += i : e += i; return o + "\n" + e } },
+      { t: "Narcissistic Numbers", sc: "Alice studies numbers equal to the sum of their digits each raised to the number of digits.", task: "Read n. Print 'n is a narcissistic number' or 'n is not a narcissistic number'.", con: ["0 ≤ n ≤ 100000"], s: "153", h: ["1", "370", "42", "1634", "12"], f: x => { const n = +x, d = String(n).split("").map(Number); return n + (d.reduce((a, b) => a + b ** d.length, 0) === n ? " is a narcissistic number" : " is not a narcissistic number") } },
+      { t: "Digit Sum Calculator", sc: "Tom wants the sum of the even digits and the sum of the odd digits of a number.", task: "Read an integer (up to 10 digits). Use a while loop. Print the sum of even digits on the first line and the sum of odd digits on the second line.", con: ["1 ≤ n ≤ 10^9"], s: "123456", h: ["86953", "37159", "45987", "768543", "529032959"], f: x => { let e = 0, o = 0; for (const c of x.trim()) { const d = +c; d % 2 ? o += d : e += d } return e + "\n" + o } },
+      { t: "Sum of First and Last Digit", sc: "A calculator needs a quick integrity check using the first and last digit of a number.", task: "Read a number and print the sum of its first and last digits.", con: ["10 ≤ n ≤ 10^9"], s: "78956", h: ["45126", "98745", "7562", "9999", "45623"], f: x => { const t = x.trim(); return String(+t[0] + +t[t.length - 1]) } },
+      { t: "Fibonacci Even Number Generator", sc: "Jack wants only the even numbers of the Fibonacci sequence up to a limit.", task: "Read a limit and print the even Fibonacci numbers (starting from 0) that are less than or equal to the limit, separated by spaces. For 0 or a negative limit print invalid.", con: ["-100 ≤ limit ≤ 100000"], s: "5", h: ["40", "150", "-2", "2600", "11000"], f: x => { const n = +x; if (n <= 0) return "Invalid"; let a = 0, b = 1, o = []; while (a <= n) { if (a % 2 === 0) o.push(a);[a, b] = [b, a + b] } return o.join(" ") } },
+      { t: "Odd or Even Numbers Series", sc: "A teacher prints a series of odd or even numbers depending on the limit.", task: "Read a limit. If the limit is odd print all odd numbers up to it, if even print all even numbers up to it, separated by spaces. If the limit is 0 or negative print not a positive integer.", con: ["-100 ≤ limit ≤ 1000"], s: "9", h: ["7", "8", "15", "18", "-4"], f: x => { const n = +x; if (n <= 0) return "not a positive integer"; let o = []; for (let i = n % 2 ? 1 : 2; i <= n; i += 2)o.push(i); return o.join(" ") } },
+      { t: "Vowel Counter", sc: "A developer counts the vowels in a word.", task: "Read a single word (no spaces) and print the number of vowels (a, e, i, o, u in upper or lower case) in it.", con: ["1 ≤ length ≤ 50", "The word contains only letters"], s: "Bestfriends", h: ["PersonalizedSkill", "PSTeam", "PSHeadquarters", "helloworld", "waterbottle"], f: x => String((x.match(/[aeiou]/gi) || []).length) },
+      { t: "Harshad Number", sc: "Students check numbers that are divisible by the sum of their digits.", task: "Read n. Print 'n is harshad number' if n is divisible by the sum of its digits, otherwise print 'n is not harshad number'", con: ["1 ≤ n ≤ 100000"], s: "18", h: ["25", "12", "36", "51", "21"], f: x => { const n = +x, sm = String(n).split("").reduce((a, b) => a + +b, 0); return n + (n % sm === 0 ? " is harshad number" : " is not harshad number") } },
+      { t: "Leap and Non-Leap Years", sc: "Friends want to know if a year is a leap year and how many leap years follow it.", task: "Read a year. Print 'Y is a leap year' or 'Y is not a leap year'. Then print 'leap years: L' and 'non-leap years: N' for the 10 years after the given year (year+1 to year+10).", con: [], s: "2022", s2: "2020", h: ["2024", "2010", "2100", "1996", "2018"], f: x => { const y = +x; const L = range(y + 1, y + 10).filter(lp).length; return y + (lp(y) ? " is a leap year" : " is not a leap year") + "\nleap years: " + L + "\nnon-leap years: " + (10 - L) } },
+      { t: "Square Pattern", sc: "Alice prints a square of # characters for a visual project.", task: "Read the size of the square and print it using '#' separated by spaces. If the size is less than 1 print 'N is invalid input' (N is the number given).", con: [], s: "3", s2: "-10", h: ["6", "5", "0", "-5", "2"], f: x => { const n = +x; return n < 1 ? n + " is invalid input" : rows(n, () => Array(n).fill("#").join(" ")) } },
+      { t: "Alphabet Triangle Generator", keep: 1, sc: "Children build a triangle from alphabet blocks.", task: "Read the number of rows N. Print N rows where row i has the i-th letter (A, B, C, ...) repeated i times. If N is 0 or negative print invalid.", con: [], s: "3", s2: "0", h: ["2", "4", "-3", "5", "6"], f: x => { const n = +x; return n <= 0 ? "invalid" : rows(n, i => String.fromCharCode(64 + i).repeat(i)) } },
+      { t: "Finding the Next Palindrome", sc: "Sarah looks for the next palindromic number after a given number.", task: "Read an integer and print the smallest palindrome number greater than it.", con: [], s: "123", h: ["1234", "5432", "999", "600", "1120"], f: x => { let n = +x + 1; while (!pal(n)) n++; return String(n) } },
+      { t: "Consecutive Palindromic Numbers", sc: "Alice generates palindromic numbers starting from a given number.", task: "Read a starting number and print the next five palindromic numbers (the start itself counts if it is a palindrome), separated by spaces.", con: [], s: "10", s2: "99", h: ["500", "11", "12345", "777", "650"], f: x => { let n = +x, o = []; while (o.length < 5) { if (pal(n)) o.push(n); n++ } return o.join(" ") } },
+      { t: "Palindromic Right-Angled Triangle", sc: "John prints a triangle whose rows go up and then come back down.", task: "Read the number of rows N. Row i prints i ascending numbers (continuing the counter from the previous row) followed by the same numbers descending without repeating the last one. For N of 0 or less print invalid.", con: [], s: "4", s2: "-4", h: ["2", "3", "0", "5", "6"], f: x => { const n = +x; if (n <= 0) return "invalid"; let k = 1; return rows(n, i => { const a = []; for (let j = 0; j < i; j++)a.push(k++); return a.concat(a.slice(0, -1).reverse()).join(" ") }) } },
+      { t: "The Palindromic Sum", sc: "Alice adds all palindromic numbers up to a limit.", task: "Read a positive integer n and print the sum of all palindrome numbers from 1 to n.", con: [], s: "10", s2: "99", h: ["19", "36", "95", "150", "70"], f: x => { let t = 0; for (let i = 1; i <= +x; i++)if (pal(i)) t += i; return String(t) } },
+      { t: "Multiples of 5 Pattern", sc: "A program prints rows of multiples of 5 that grow with each row.", task: "Read the number of rows. Row i prints 5, 10, ... up to i multiples of 5. If rows is less than 1 print invalid.", con: [], s: "4", s2: "-5", h: ["3", "5", "7", "-8", "1"], f: x => { const n = +x; return n < 1 ? "invalid" : rows(n, i => range(1, i).map(v => v * 5).join(" ")) } },
+      { t: "Squares of Even or Odd Numbers", sc: "A program prints squares depending on whether the input is even or odd.", task: "Read an integer. If it is even print the squares of all even numbers up to it, if odd print the squares of all odd numbers up to it, separated by spaces.", con: [], s: "6", s2: "11", h: ["7", "12", "9", "21", "8"], f: x => { const n = +x, o = []; for (let i = n % 2 ? 1 : 2; i <= n; i += 2)o.push(i * i); return o.join(" ") } },
+      { t: "Prime Pattern", sc: "A right-angled triangle prints asterisks only for prime-numbered rows.", task: "Read the number of rows. For every row number that is prime print that many asterisks separated by spaces (row 2 prints 2, row 3 prints 3). 1 is not prime.", con: [], s: "6", s2: "10", h: ["5", "8", "2", "4", "7"], f: x => { const o = []; for (let i = 2; i <= +x; i++)if (isP(i)) o.push(Array(i).fill("*").join(" ")); return o.join("\n") } },
+      { t: "The Perfect Number Detective", sc: "Sam detects perfect numbers, whose proper divisors add up to the number.", task: "Read n. If n is a perfect number print its largest proper divisor, otherwise print n itself.", con: [], s: "6", s2: "10", h: ["28", "12", "496", "50", "8128"], f: x => { const n = +x; let s = 0, m = 0; for (let i = 1; i < n; i++)if (n % i === 0) { s += i; m = i } return String(s === n ? m : n) } },
+      { t: "Digit Incrementer", sc: "Programmers build a toy encryption that adds 1 to every digit.", task: "Read an integer and add 1 to each digit (9 becomes 0). Print the new number without leading zeros.", con: [], s: "245", s2: "9876", h: ["7345", "12589", "9765", "3087", "51276"], f: x => String(+x.trim().split("").map(d => (+d + 1) % 10).join("")) },
+      { t: "Printing Pattern in Reverse Order", sc: "A teaching tool prints number rows that get shorter.", task: "Read the number of rows N. Row 1 prints 1 to N, row 2 prints 1 to N-1, and so on until 1. If N is 0 or less print invalid input.", con: [], s: "4", s2: "-4", h: ["7", "8", "2", "1", "0"], f: x => { const n = +x; if (n <= 0) return "invalid input"; const o = []; for (let k = n; k >= 1; k--)o.push(range(1, k).join(" ")); return o.join("\n") } },
+      { t: "The Odd Factorial Quest", sc: "Adventurers must find the product of all odd numbers up to an odd number.", task: "Read n. If n is less than 1 print invalid. If n is even print please enter a valid odd number. Otherwise print the product of all odd numbers from 1 to n.", con: [], s: "5", s2: "6", h: ["7", "-3", "4", "11", "13"], f: x => { const n = +x; if (n < 1) return "invalid"; if (n % 2 === 0) return "please enter a valid odd number"; let p = 1; for (let i = 1; i <= n; i += 2)p *= i; return String(p) } },
+      { t: "Series Expansion", sc: "Students explore the series 1 - x^2/2! + x^4/4! - x^6/6! + ...", task: "Read x and then the number of terms n. Print the sum of the first n terms of the series with 2 decimal places.", con: [], s: "7\n5", s2: "4\n7", h: ["6\n4", "9\n5", "10\n6", "7\n7", "9\n8"], f: x => { const [a, n] = num(x); let s = 0, t = 1; for (let k = 0; k < n; k++) { s += (k % 2 ? -1 : 1) * t; t = t * a * a / ((2 * k + 1) * (2 * k + 2)) } return s.toFixed(2) } },
+      { t: "Exploring the Growth Series", sc: "Lily studies a series where every term is twice the previous one.", task: "Read the number of terms and then the first term. Print the series separated by spaces.", con: [], s: "5\n3", h: ["6\n11", "3\n15", "8\n10", "1\n7", "7\n3"], f: x => { const [n, a] = num(x); return range(0, n - 1).map(i => a * 2 ** i).join(" ") } },
+      { t: "Sum of N Odd Natural Numbers", sc: "A community centre teaches odd numbers to children.", task: "Read n. Print the first n odd natural numbers on the first line and their sum on the second line.", con: [], s: "5", h: ["4", "6", "8", "3", "9"], f: x => { const n = +x; return range(1, n).map(i => 2 * i - 1).join(" ") + "\n" + n * n } },
+      { t: "Floyd's Triangle", sc: "A program prints Floyd's Triangle, a triangle of consecutive natural numbers.", task: "Read the number of rows and print Floyd's Triangle starting from 1. For a negative number print invalid.", con: [], s: "4", s2: "-2", h: ["5", "2", "-7", "8", "3"], f: x => +x < 0 ? "invalid" : tri(+x) },
+      { t: "Automorphic Number", sc: "A maths club looks for numbers whose square ends with the number itself.", task: "Read n. Print 'n is an automorphic number' if the square of n ends with the digits of n, otherwise print 'n is not an automorphic number'.", con: [], s: "6", s2: "7", h: ["25", "15", "8", "76", "376"], f: x => { const n = +x; return n + (String(n * n).endsWith(String(n)) ? " is an automorphic number" : " is not an automorphic number") } },
+      { t: "Sum of Even Numbers", sc: "A program adds the even numbers from 1 to N.", task: "Read a positive integer N and print the sum of even numbers from 1 to N. For a negative N print 'N is an invalid number'.", con: [], s: "20", s2: "-12", h: ["11", "25", "31", "-6", "40"], f: x => { const n = +x; if (n < 0) return n + " is an invalid number"; let s = 0; for (let i = 2; i <= n; i += 2)s += i; return String(s) } },
+      { t: "XOR Operations", sc: "An encryption developer applies a number rule repeatedly until the value reaches 1.", task: "Read n. While n is not 1: if n is even divide it by 2, if odd multiply by 3 and add 1. Print the number of steps taken.", con: [], s: "6", s2: "25", h: ["16", "30", "46", "72", "7"], f: x => { let n = +x, c = 0; while (n !== 1) { n = n % 2 ? 3 * n + 1 : n / 2; c++ } return String(c) } },
+      { t: "Sum of the Middle Digits", sc: "A bank validates an account number using its middle digits.", task: "Read a number and print the sum of its digits excluding the first and the last digit.", con: [], s: "14562", s2: "10254823", h: ["369852", "4789562", "789", "8523", "87456"], f: x => { const t = x.trim().slice(1, -1); return String([...t].reduce((a, b) => a + +b, 0)) } },
+      { t: "Perfect Square", sc: "A developer checks whether a number is a perfect square.", task: "Read an integer n. For a negative n print 'n is invalid number'. Otherwise print 'n is a perfect square' or 'n is not a perfect square'.", con: [], s: "16", s2: "2", h: ["400", "25", "785", "-1", "9"], f: x => { const n = +x; if (n < 0) return n + " is invalid number"; return n + (Number.isInteger(Math.sqrt(n)) ? " is a perfect square" : " is not a perfect square") } },
+      { t: "Alphabetical Pattern", keep: 1, sc: "A program prints rows of letters in alphabetical order.", task: "Read the number of rows (1 to 26). Row i prints the first i letters (A, AB, ABC, ...). If the number is below 1 or above 26 print 'N is an invalid input'.", con: [], s: "5", s2: "30", h: ["4", "3", "6", "-10", "27"], f: x => { const n = +x; return n < 1 || n > 26 ? n + " is an invalid input" : rows(n, i => range(1, i).map(c => String.fromCharCode(64 + c)).join("")) } },
+      { t: "Product of N Digits", sc: "A device multiplies all the digits of a number it receives.", task: "Read a number and print the product of its digits. If the product is zero print invalid input.", con: [], s: "1258", s2: "12508", h: ["741258", "453789", "928679861", "6782341", "998045"], f: x => { const p = [...x.trim()].reduce((a, b) => a * b, 1); return p === 0 ? "invalid input" : String(p) } },
+      { t: "Prime Numbers in a Range", sc: "Children at a fair look for prime numbers between two chosen numbers.", task: "Read the starting number and the ending number. Print all prime numbers in that range (both included) separated by spaces.", con: [], s: "10\n25", s2: "2\n5", h: ["5\n20", "10\n30", "11\n34", "1\n10", "67\n95"], f: x => { const [a, b] = num(x); return range(a, b).filter(isP).join(" ") } },
+      { t: "Palindrome Check", sc: "Students at a maths club test numbers for symmetry.", task: "Read a positive integer. Print 'n is a palindrome' if it reads the same forwards and backwards, otherwise print 'n is not a palindrome'.", con: [], s: "33233", s2: "3214", h: ["121", "66", "145", "77", "1064"], f: x => { const n = +x; return n + (pal(n) ? " is a palindrome" : " is not a palindrome") } },
+      { t: "Check Second Even Number", sc: "A data-analysis project works with a user-defined range.", task: "Read the starting and ending numbers of a range. If both numbers are odd print 'a and b are not even'. Otherwise print the second even number of the range.", con: [], s: "14 20", s2: "15 41", h: ["16 40", "80 120", "75 25", "150 500", "79 45"], f: x => { const [a, b] = num(x); if (a % 2 && b % 2) return a + " and " + b + " are not even"; return String((a % 2 ? a + 1 : a) + 2) } },
+      { t: "Reverse the Digits", sc: "A numerical tool reverses the digits of a positive number.", task: "Read an integer. If it is negative print 'n is not a positive number', otherwise print the number with its digits reversed (leading zeros of the result are dropped).", con: [], s: "96387", s2: "-52", h: ["9963821", "5869", "29876", "480", "1200"], f: x => { const n = +x; return n < 0 ? n + " is not a positive number" : String(+String(n).split("").reverse().join("")) } },
+      { t: "Multiples of 5 — Pattern Printing", sc: "A program prints rows of multiples of 5 that grow with each row.", task: "Read the number of rows. Row i prints the first i multiples of 5. If the number of rows is less than 1 print 'n is an invalid input'.", con: [], s: "4", s2: "-35", h: ["3", "8", "6", "0", "5"], f: x => { const n = +x; return n < 1 ? n + " is an invalid input" : rows(n, i => range(1, i).map(v => v * 5).join(" ")) } }
+    ];
+    const S2 = { "Fibonacci Series": "-5", "Prime or Composite Number": "12", "Abundant Number": "7", "Harmonic Series": "-15", "Pyramid Pattern": "-3", "Perfect Cubes": "-5", "Roman Numerals": "56", "Strong Number": "1", "LCM Finder": "-3 4", "Divisor Sum and Equality Checker": "6", "Geometric Series Sum": "-1", "Sum of Squares of N Natural Numbers": "-10", "Narcissistic Numbers": "126", "Fibonacci Even Number Generator": "-6", "Odd or Even Numbers Series": "4", "Harshad Number": "99" };
+    Q.forEach(x => { if (S2[x.t]) x.s2 = S2[x.t] });
+
+    const D = { G: ["Google Patents", "https://patents.google.com"], E: ["Espacenet", "https://worldwide.espacenet.com"], W: ["WIPO PATENTSCOPE", "https://patentscope.wipo.int"] };
+    const tools = [["Google Patents", D.G[1], "Free full-text search, family and citation view."], ["Espacenet", D.E[1], "EPO database, CPC classification search."], ["WIPO PATENTSCOPE", D.W[1], "PCT international applications and national collections."]];
+    const dt = ["Date of Application (dd.mm.yyyy)", "d"], st = ["Application Status", "s"], pub = ["Date of publication (dd.mm.yyyy)", "d"], gr = ["Date of Grant (dd.mm.yyyy)", "d"], ti = ["Title (UPPER CASE)", "u"], an = ["Application Number", "t"], tp = ["Title of the Patent (UPPER CASE)", "u"], ap = ["Application number", "t"], dn = ["Device name (UPPER CASE)", "u"], at = ["Application Title (UPPER CASE)", "u"];
+    const g = (a) => a;
+    const Q1 = {
+      B: [
+        { n: 1, db: "W", given: ["Patent Application: 93420215"], f: [dt, st, pub, ti] },
+        { n: 2, db: "W", given: ["Patent Application: 202141023814"], f: [dt, st, pub, ti] },
+        { n: 3, db: "G", given: ["Patent Application: US15/795,915"], f: [dt, st, gr, ti] },
+        { n: 4, db: "W", given: ["Patent Application: 93420215"], f: [dt, st, pub, ti] }],
+      C: [
+        { n: 5, db: "W", given: ["Company Name: Airbus", "Grant date: 14.08.2012", "Title description: AIRCRAFT AGAINST A HARD LANDING"], f: [an, ti, st] },
+        { n: 6, db: "E", given: ["Company Name: HCL TECHNOLOGIES LTD", "Publication date: 02.06.2016", "Title description: DEVICE OVER AN INTERNET OF THINGS"], f: [an, ti, st] },
+        { n: 7, db: "E", given: ["Company Name: CISCO SYSTEMS INC", "Publication date range: 09.09.1997 : 10.09.1997", "Abstract description: cell at the beginning or end of a frame"], f: [an, ti, st] }],
+      D: [
+        { n: 8, db: "G", given: ["CPC Classification code: A61B6/0487", "Country of origin: US", "Priority date range: 21.11.2006 - 22.11.2006"], f: [tp, ap, st] },
+        { n: 9, db: "G", given: ["CPC Classification code: A01N59/12", "Country of origin: CU (Cuba)", "Application date range: 01.06.2016 - 30.09.2016"], f: [tp, ap, st] },
+        { n: 10, db: "W", given: ["CPC Classification code: E04H1/005", "Country of origin: EP (European Patent Office)", "Publication date range: 11.10.2006 TO 11.11.2006"], f: [tp, ap, st] }],
+      E: [
+        { n: 11, db: "W", given: ["Company name: Pendulum Fitness, Inc.", "Publication date: 26.02.2002", "Hint: A mass (bob) attached to a string that swings back and forth under the influence of gravity. It demonstrates simple harmonic motion."], f: [dn, ap, at, st] },
+        { n: 12, db: "E", given: ["Company name: BLOODLINE TECHNOLOGY", "Publication date: 30.04.1991", "Hint: A medical instrument used for listening to internal body sounds, such as heartbeats and lung sounds."], f: [dn, ap, at, st] },
+        { n: 13, db: "G", given: ["Company name: Xidian University", "Priority date: 19.08.2015", "Hint: A tool with two pivoted blades that slide past each other to cut materials. The pivot acts as the fulcrum, making it a lever."], f: [dn, ap, at, st] }]
+    };
+
+    const PL = [
+      ["US174465A", "07.03.1876", "Alexander Graham Bell", "a method and apparatus for sending speech over wires (telephone)", null],
+      ["US223898A", "27.01.1880", "Thomas A. Edison", "a glowing carbon filament lamp in a sealed glass bulb", "H01K"],
+      ["US821393A", "22.05.1906", "Orville Wright, Wilbur Wright", "a powered heavier-than-air flying machine with wings and rudders", "B64C"],
+      ["US200521A", "19.02.1878", "Thomas A. Edison", "a machine that records and plays back sound on a rotating cylinder", "G11B"],
+      ["US6281A", "10.04.1849", "Walter Hunt", "a coiled wire pin with a guard covering the sharp point", "A44B"],
+      ["US1219881A", "20.03.1917", "Gideon Sundback", "interlocking teeth closed by a sliding pull", "A44B"],
+      ["US6285999B1", "04.09.2001", "Lawrence Page", "ranking nodes in a linked database such as the web", "G06F"],
+      ["US381968A", "01.05.1888", "Nikola Tesla", "an alternating-current electric motor", "H02K"],
+      ["US1773980A", "26.08.1930", "Philo T. Farnsworth", "an electronic system for transmitting moving pictures", "H04N"],
+      ["US2524035A", "03.10.1950", "John Bardeen, Walter H. Brattain", "a three-electrode semiconductor element that amplifies signals", "H01L"],
+      ["US4237224A", "02.12.1980", "Stanley N. Cohen, Herbert W. Boyer", "producing recombinant DNA molecules in host cells", "C12N"],
+      ["US3009235A", "21.11.1961", "George de Mestral", "a hook-and-loop separable fastening device", "A44B"],
+      ["US3005282A", "24.10.1961", "Godtfred Kirk Christiansen", "a toy building brick with studs and tubes", "A63H"],
+      ["US5960411A", "28.09.1999", "Peri Hartman", "placing a purchase order over a network with a single action", "G06Q"],
+      ["US4378116A", "29.03.1983", "Erno Rubik", "a cube puzzle whose rotating layers scramble colours", "A63F"],
+      ["US2026082A", "31.12.1935", "Charles B. Darrow", "a board game about buying and trading properties", "A63F"],
+      ["US2929922A", "22.03.1960", "Arthur L. Schawlow, Charles H. Townes", "amplifying microwaves and light by stimulated emission (maser/laser)", "H01S"],
+      ["US3541541A", "17.11.1970", "Douglas C. Engelbart", "a hand-held device that moves a cursor on a display", "G06F"],
+      ["US4063220A", "13.12.1977", "Robert M. Metcalfe", "a data network that detects collisions between senders", "H04L"],
+      ["US549160A", "05.11.1895", "George B. Selden", "a self-propelled road vehicle with a gasoline engine", null],
+      ["US139121A", "20.05.1873", "Jacob W. Davis, Levi Strauss", "metal rivets that strengthen pocket openings in trousers", null],
+      ["US31128A", "15.01.1861", "Elisha G. Otis", "a hoisting platform with a safety catch", "B66B"],
+      ["US645576A", "20.03.1900", "Nikola Tesla", "transmitting electrical energy without wires", null],
+      ["US1102653A", "07.07.1914", "Robert H. Goddard", "a rocket using solid or liquid fuel", "F02K"],
+      ["US763772A", "28.06.1904", "Guglielmo Marconi", "tuned apparatus for wireless telegraphy", "H04B"],
+      ["US775134A", "15.11.1904", "King C. Gillette", "a safety razor with a thin replaceable blade", "B26B"],
+      ["US3138743A", "23.06.1964", "Jack S. Kilby", "several electronic parts formed on one piece of semiconductor", "H01L"],
+      ["US2981877A", "25.04.1961", "Robert N. Noyce", "a semiconductor device with leads on a flat surface", "H01L"],
+      ["US3953566A", "27.04.1976", "Robert W. Gore", "a stretched porous PTFE material", null]];
+    const OFF = ["Fibonacci Series", "Smallest Prime Number", "Prime or Composite Number", "Series Sum Calculator", "Divisor Sum and Equality Checker", "Abundant Number", "Count the Number of Leap and Non-Leap Years", "Geometric Series Sum Calculator", "Sum of Squares of N Natural Numbers", "Harmonic Series", "Digits Count", "Square Pattern", "Pyramid Pattern", "Swap the Digits", "Perfect Cubes", "Roman Numerals", "Sum of N Odd and Even Numbers", "Detecting Narcissistic Numbers", "Digit Sum Calculator", "Alphabet Triangle Generator", "Finding the Next Palindrome", "Finding Consecutive Palindromic Numbers", "Generating Palindromic Right-Angled Triangle", "The Palindromic Sum", "Pattern Printing with Multiples of 5", "Squares of Even Numbers & Odd Number Series", "Prime Pattern", "LCM Finder", "The Perfect Number Detective", "Handshake Simulation Program", "Odd or Even Numbers Series", "Digit Summation", "Vowel Counter", "Digit Incrementer", "Printing Pattern in Reverse Order", "The Odd Factorial Quest", "Series Expansion", "Fibonacci Even Number Generator", "Exploring the Growth Series", "Sum of All Prime Factors", "Sum N Odd Natural Numbers", "Check Second Even Number", "Floyd's Triangle", "Automorphic Number", "Sum of First and Last Digit", "Sum of Even Numbers", "XOR Operations", "Sum of the Middle Digits", "Reverse the Digits", "Perfect Square", "Alphabetical Pattern", "Multiples of 5 \u2014 Pattern Printing", "Product of N Digits", "Prime Number in Range", "Harshad Number", "Strong Number"];
+    const ALIAS = { "Smallest 5 Primes Greater Than N": "Smallest Prime Number", "Leap and Non-Leap Years": "Count the Number of Leap and Non-Leap Years", "Geometric Series Sum": "Geometric Series Sum Calculator", "Sum of Odd and Even Numbers up to N": "Sum of N Odd and Even Numbers", "Narcissistic Numbers": "Detecting Narcissistic Numbers", "Palindromic Right-Angled Triangle": "Generating Palindromic Right-Angled Triangle", "Consecutive Palindromic Numbers": "Finding Consecutive Palindromic Numbers", "Multiples of 5 Pattern": "Pattern Printing with Multiples of 5", "Squares of Even or Odd Numbers": "Squares of Even Numbers & Odd Number Series", "Handshake Simulation": "Handshake Simulation Program", "Sum of N Odd Natural Numbers": "Sum N Odd Natural Numbers", "Prime Numbers in a Range": "Prime Number in Range" };
+    const T3 = ["Average of an Array", "Finding Maximum / Largest Number", "Peak Element", "Left Rotation", "Right Rotation", "Number of Occurrence of a Number", "Sum and Product of an Array", "Square of Array Elements", "Difference Between Maximum and Minimum", "Number of Elements Divisible by a Number", "Removing Duplicate Elements", "Negative Elements", "Positive Elements", "Deleting an Element at a Position", "Sum of Duplicate Elements", "Non-Prime Numbers", "Sum of First, Second, Last and Last-Before Elements", "Printing Unique Numbers", "Second Largest Number", "Ascending Order", "Removing Even Numbers", "Removing First Occurrence of a Number", "Pair Whose Sum Is Closest to Zero", "Median", "Chunk Size", "Inserting an Element at a Particular Position", "Find Frequency of Elements", "Deleting Duplicate Elements (Keep First Occurrence)", "Merge Two Arrays and Sort in Ascending Order", "Reverse Array Elements", "Print Even and Odd Numbers in Separate Arrays", "Searching an Element and Printing Its Position", "Question Missing in the Original PDF", "Find a Pair with a Given Sum", "Removing the First Occurrence of a Number", "Sum of Neighbour Peak Elements", "Swapping Two Elements", "Sorted or Not Sorted", "Sort Ascending, Even Numbers First and Odd Numbers Next", "Removing the Occurrence of a Digit", "Product of an Array Without Multiplying the Present Index", "How Many Numbers Are Smaller Than the Current Number?", "Ranking", "Removing Even Numbers at Even Indices", "Removing Elements Greater Than a Given Number", "Last Repeated Element", "Elements Greater Than All Elements to Their Right", "Maximum Sum of Array Elements", "Sum of Non-Repeated Numbers", "Left Character Rotation", "Print Indices of Pairs That Give the Target Sum", "Converting Angle to Radian"];
+    // ===== Level 3 (Arrays) — AI-authored questions, review required =====
+    const rng = seed => { let s = seed; return () => (s = (s * 1103515245 + 12345) % 2147483648) / 2147483648 };
+    function AQ(t, task, o, core) {
+      const inp = [];
+      for (let i = 0; i < 7; i++) {
+        const r = rng(97 + i * 31 + t.length), n = 5 + (i % 4), a = [];
+        while (a.length < n) { const v = o.lo + Math.floor(r() * (o.hi - o.lo + 1)); if (o.dup || !a.includes(v)) a.push(v) }
+        let s = n + "\n" + a.join(" "); if (o.ex) s += "\n" + o.ex(r, n, a, i); inp.push(s)
+      }
+      const f = x => { const L = x.split("\n"), a = L[1].trim().split(/\s+/).map(Number); return core(a, L[2] != null ? +L[2] : null) };
+      return { t, sc: "AI-authored question (review required): the original PDF text for this question was not supplied.", task: task + " Input: first line n, second line n integers" + (o.exn ? ", third line " + o.exn : "") + ".", con: [], s: inp[0], s2: inp[1], h: inp.slice(2), f, ai: 1 }
+    }
+    const sum = a => a.reduce((x, y) => x + y, 0);
+    const AQS = [
+      AQ(T3[0], "Print the average of the array elements with 2 decimal places.", { lo: -5, hi: 30 }, a => (sum(a) / a.length).toFixed(2)),
+      AQ(T3[1], "Print the largest number in the array.", { lo: -20, hi: 50 }, a => String(Math.max(...a))),
+      AQ(T3[2], "Print every peak element (greater than its neighbours; an end element only needs to beat its single neighbour), separated by spaces.", { lo: 1, hi: 60 }, a => a.filter((v, i) => (i === 0 || v > a[i - 1]) && (i === a.length - 1 || v > a[i + 1])).join(" ")),
+      AQ(T3[3], "Rotate the array to the left by k positions and print it.", { lo: 1, hi: 60, exn: "k", ex: (r, n) => 1 + Math.floor(r() * (n - 1)) }, (a, k) => a.slice(k).concat(a.slice(0, k)).join(" ")),
+      AQ(T3[4], "Rotate the array to the right by k positions and print it.", { lo: 1, hi: 60, exn: "k", ex: (r, n) => 1 + Math.floor(r() * (n - 1)) }, (a, k) => a.slice(-k).concat(a.slice(0, -k)).join(" ")),
+      AQ(T3[5], "Print how many times the number x occurs in the array.", { lo: 1, hi: 4, dup: 1, exn: "x", ex: (r, n, a) => a[Math.floor(r() * n)] }, (a, x) => String(a.filter(v => v === x).length)),
+      AQ(T3[6], "Print the sum of the elements on the first line and their product on the second line.", { lo: -3, hi: 5 }, a => sum(a) + "\n" + a.reduce((x, y) => x * y, 1)),
+      AQ(T3[7], "Print the square of every element, separated by spaces.", { lo: -9, hi: 12 }, a => a.map(v => v * v).join(" ")),
+      AQ(T3[8], "Print the difference between the maximum and the minimum element.", { lo: -30, hi: 60 }, a => String(Math.max(...a) - Math.min(...a))),
+      AQ(T3[9], "Print how many elements are divisible by d.", { lo: 1, hi: 40, exn: "d", ex: r => 2 + Math.floor(r() * 4) }, (a, d) => String(a.filter(v => v % d === 0).length)),
+      AQ(T3[10], "Remove every element that appears more than once and print the remaining elements in order. Print empty if nothing remains.", { lo: 1, hi: 7, dup: 1 }, a => { const o = a.filter(v => a.filter(w => w === v).length === 1); return o.length ? o.join(" ") : "empty" }),
+      AQ(T3[11], "Print the negative elements in their original order, or none if there are no negative elements.", { lo: -8, hi: 8 }, a => { const o = a.filter(v => v < 0); return o.length ? o.join(" ") : "none" }),
+      AQ(T3[12], "Print the positive elements in their original order, or none if there are no positive elements.", { lo: -8, hi: 8 }, a => { const o = a.filter(v => v > 0); return o.length ? o.join(" ") : "none" }),
+      AQ(T3[13], "Delete the element at position pos (1-based) and print the remaining array. If pos is outside 1..n print invalid position.", { lo: 1, hi: 60, exn: "pos", ex: (r, n, a, i) => i % 3 === 2 ? n + 2 : 1 + Math.floor(r() * n) }, (a, p) => p < 1 || p > a.length ? "invalid position" : a.filter((_, i) => i !== p - 1).join(" "))
+    ];
+    const C2 = OFF.map(name => { const old = Object.keys(ALIAS).find(k => ALIAS[k] === name) || name, q = Q.find(x => x.t === old); if (!q) throw new Error("Missing question: " + name); return Object.assign({}, q, { t: name }) });
+    const C3 = T3.map((t, i) => AQS[i] || { t, pending: 1, missing: i === 32 });
+    // ===== helpers =====
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const norm = s => String(s).split("\n").map(l => l.replace(/\s+$/, "")).join("\n").trim();
+    const ex = (q, x) => { const o = q.f(x); return q.keep ? o : o.split("\n").map(l => l.replace(/\.$/, "").toLowerCase()).join("\n") };
+    const extra = x => /^[A-Za-z]+$/.test(x.trim()) ? x.trim().split("").reverse().join("") : x.replace(/-?\d+/g, m => String(+m + 1));
+    const tests = q => { if (q.s2 != null) return { op: [q.s, q.s2], hd: q.h }; const used = [q.s, ...q.h]; let e = extra(q.s), k = 0; while (used.includes(e) && k++ < 6) e = extra(e); return { op: [q.s, q.h[0]], hd: [...q.h.slice(1), e] } };
+    const TY = { "%d": "int", "%ld": "long", "%f": "float", "%lf": "double", "%c": "char" };
+    function prep(c) { return c.replace(/main\s*\(\s*void\s*\)/g, "main()").replace(/scanf\s*\(\s*"(%d|%ld|%f|%lf|%c)"\s*,\s*(?:&\s*(\w+)\s*\[([^\]]+)\]|(\w+)\s*\+\s*(\w+))\s*\)/g, (m, f, a, i, b, j) => "{ " + TY[f] + " __t; scanf(\"" + f + "\", &__t); " + (a || b) + "[" + (i || j) + "] = __t; }") }
+    const TPL = "#include <stdio.h>\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    \n    return 0;\n}\n";
+    const CATS = { c2: { name: "C LEVEL 2", desc: "C Programming Level 2 Assessment", qs: C2 }, c3: { name: "C LEVEL 3", desc: "C Programming Level 3 Assessment (Arrays)", qs: C3 } };
+    const nLv = c => Math.ceil(CATS[c].qs.length / 2);
+    const qAt = (c, l) => [CATS[c].qs[2 * l - 2], CATS[c].qs[2 * l - 1]].filter(Boolean);
+    const ready = (c, l) => qAt(c, l).every(q => !q.pending);
+    async function runC(code, input, limit = 4000) {
+      let out = "", d;
+      try { d = JSCPP.run(prep(code), input, { debug: true, stdio: { write: t => { out += t } } }) } catch (e) { return { ok: false, out, err: String(e && e.message || e), line: 0, compile: true } }
+      const t0 = Date.now(); let done;
+      const bad = e => { let L = 0; try { const nn = d.nextNode(); L = nn && nn.sLine || 0 } catch (_) { } return { ok: false, out, err: String(e && e.message || e), line: L } };
+      try { while (!done) { for (let i = 0; i < 500 && !done; i++)done = d.next(); if (!done) { if (Date.now() - t0 > limit) return { ok: false, out, err: "Time limit exceeded (possible infinite loop)", line: 0 }; await new Promise(r => setTimeout(r, 0)) } } } catch (e) { return bad(e) }
+      return { ok: true, out }
+    }
+    const errLine = r => r.line || +((String(r.err).match(/line\s*(\d+)/i) || [])[1]) || 0;
+    // ===== users / storage =====
+    const HASH = "c9cc16b9a2c2e88685fcb9d5260e2ec11d51773444f4a85445c1035263e0b960";
+    const USER = "vivinkg@email.com";
+    let U = null, P = null, V = "login", CUR = "c2", tick = null, LVC = "c2";
+    async function sha(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("") }
+    const key = () => "gvp_" + U;
+    function load() { try { P = JSON.parse(localStorage.getItem(key()) || "null") } catch (e) { P = null } P = P || {};["c2", "c3"].forEach(c => { P[c] = P[c] || { unlocked: 1, done: {}, att: null, hist: [] } }); P.ipr = P.ipr || { ans: {}, done: false }; P.last = P.last || null }
+    function save() { try { localStorage.setItem(key(), JSON.stringify(P)) } catch (e) { } }
+    const app = $("app");
+    const foot = '<div class="ft">Developed by Vivin🖤</div>';
+    function modal(msg, btns) { const m = document.createElement("div"); m.className = "mod"; m.innerHTML = '<div class="mbox"><p>' + msg + '</p><div class="mb"></div></div>'; btns.forEach(([t, fn, c]) => { const b = document.createElement("button"); b.className = "btn " + (c || ""); b.textContent = t; b.onclick = () => { m.remove(); fn && fn() }; m.querySelector(".mb").appendChild(b) }); document.body.appendChild(m) }
+    function go(v, c) { V = v; if (c) CUR = c; clearInterval(tick); document.body.classList.toggle("ex", v === "exam" || v === "ipr"); window.onbeforeunload = (v === "exam" || v === "ipr") ? e => { e.preventDefault(); e.returnValue = "" } : null; render() }
+    function topbar(extraHtml) { return '<div class="top"><span class="logo">GV PORTAL</span>' + (extraHtml || "") + '<div class="sp"></div><span style="color:var(--mu);font-size:13px">' + esc(U || "") + '</span><button class="btn o" id="lo">Logout</button></div>' }
+    function wireTop() { const b = $("lo"); if (b) b.onclick = () => { try { localStorage.removeItem("gvp_session") } catch (e) { } U = null; P = null; go("login") } }
+    // ===== render =====
+    function render() { ({ login: rLogin, home: rHome, levels: rLevels, exam: rExam, result: rResult, ipr: rIpr })[V]() }
+    function rLogin() {
+      app.innerHTML = '<div class="card login"><h1 style="letter-spacing:3px">GV PORTAL</h1><p>Welcome Back</p><label for="em">Email Address</label><input id="em" type="email" autocomplete="username"><label for="pw">Password</label><div class="pw"><input id="pw" type="password" autocomplete="current-password"><button id="tg" type="button">Show</button></div><div class="err" id="er"></div><button class="btn" id="si" style="width:100%;margin-top:6px">Sign In</button></div>' + foot;
+      $("tg").onclick = () => { const p = $("pw"); p.type = p.type === "password" ? "text" : "password"; $("tg").textContent = p.type === "password" ? "Show" : "Hide" };
+      const sub = async () => {
+        const e = $("em").value.trim().toLowerCase(), p = $("pw").value; if (!e || !p) { $("er").textContent = "Enter your email and password."; return }
+        let h = ""; try { h = await sha(p) } catch (x) { }
+        if (e === USER && h === HASH) { U = e; try { localStorage.setItem("gvp_session", e) } catch (x) { } load(); go("home") } else $("er").textContent = "Incorrect email or password."
+      };
+      $("si").onclick = sub; $("pw").onkeydown = e => { if (e.key === "Enter") sub() }
+    }
+    function cprog(c) { const p = P[c], d = Object.keys(p.done).length; return "Level " + p.unlocked + " unlocked · " + d + " / " + nLv(c) + " levels completed" + (p.att ? " · Level " + p.att.l + " in progress" : "") }
+    function rHome() {
+      const ia = Object.keys(P.ipr.ans).filter(k => P.ipr.ans[k]).length;
+      app.innerHTML = topbar('<span style="color:var(--mu);font-size:13px">Progress: C2 ' + Object.keys(P.c2.done).length + '/' + nLv("c2") + ' · C3 ' + Object.keys(P.c3.done).length + '/' + nLv("c3") + '</span>') + '<div class="wrap"><h2>Tests</h2><div class="cards">' +
+        ["c2", "c3"].map(c => '<div class="card"><h2>' + CATS[c].name + '</h2><p>' + CATS[c].desc + '</p><div class="prog">' + cprog(c) + '</div><button class="btn" data-c="' + c + '">View Levels</button></div>').join("") +
+        '<div class="card"><h2>IPR PATENT SEARCH</h2><p>Intellectual Property Rights and Patent Search Assessment</p><div class="prog">' + (P.ipr.done ? "Completed" : ia ? "In Progress (" + ia + " answers saved)" : "Not started") + '</div><button class="btn" id="ipr">' + (P.ipr.done ? "New Test" : ia ? "Continue Test" : "Start Test") + '</button></div></div></div>' + foot;
+      wireTop(); app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { LVC = b.dataset.c; go("levels", LVC) }); $("ipr").onclick = () => { if (P.ipr.done || !P.ipr.set) newIprSet(); go("ipr") }
+    }
+    function lvStatus(c, l) { const p = P[c]; if (p.done[l] != null) return "Completed"; if (p.att && p.att.l === l) return "In Progress"; return l <= p.unlocked ? "Unlocked" : "Locked" }
+    function rLevels() {
+      const c = LVC, n = nLv(c), pend = CATS[c].qs.filter(q => q.pending).length;
+      let h = topbar('<span>' + CATS[c].name + '</span><span style="color:var(--mu);font-size:13px">' + cprog(c) + '</span>') + '<div class="wrap"><button class="btn o" id="bk">← Home</button>';
+      if (c === "c3") h += '<div class="warn">Admin notice: C Level 3 Question 33 is blank in the supplied list and is held. ' + pend + ' of 52 questions still have no content, so only levels with both questions available can start. Questions marked AI-authored need review.</div>';
+      h += '<div class="lv">';
+      for (let l = 1; l <= n; l++) {
+        const s = lvStatus(c, l), ok = ready(c, l), tag = s.replace(" ", "");
+        h += '<div class="lc"><b>Level ' + l + '</b><br><span class="tag ' + tag + '">' + s + '</span>' + (P[c].done[l] != null ? ' <small>Score ' + P[c].done[l] + '</small>' : "") + '<br>';
+        if (!ok) h += '<button class="btn" disabled>Content pending</button>';
+        else if (s === "Locked") h += '<button class="btn" disabled>Locked</button>';
+        else h += '<button class="btn" data-l="' + l + '">' + (s === "In Progress" ? "Continue Test" : s === "Completed" ? "Retry Level" : "Start Test") + '</button>';
+        h += '</div>'
+      }
+      app.innerHTML = h + '</div></div>' + foot; wireTop(); $("bk").onclick = () => go("home");
+      app.querySelectorAll("[data-l]").forEach(b => b.onclick = () => { const l = +b.dataset.l; if (lvStatus(c, l) === "In Progress") resume(c); else startAtt(c, l) })
+    }
+    function fs() { try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen() } catch (e) { } }
+    function startAtt(c, l) { const q = [2 * l - 2, 2 * l - 1].filter(i => CATS[c].qs[i]); P[c].att = { l, qs: q, code: {}, res: {}, cur: 0, end: Date.now() + 30 * 60000 }; save(); fs(); go("exam", c) }
+    function resume(c) { fs(); go("exam", c) }
+    // ===== exam =====
+    const AC = "printf scanf main int char float double void if else for while do switch case break continue return include #include stdio.h string.h strlen strcmp strcpy sizeof long short unsigned struct typedef const array pointer".split(" ");
+    const SN = { "for": "for (int i = 0; i < n; i++) {\n    §\n}", "while": "while (§) {\n    \n}", "do": "do {\n    §\n} while ();", "if": "if (§) {\n    \n}", "else": "else {\n    §\n}", "printf": 'printf("§");', "scanf": 'scanf("%d", &§);', "main": "int main(void) {\n    §\n    return 0;\n}", "#include": "#include <stdio.h>", "include": "#include <stdio.h>", "switch": "switch (§) {\n    case 1:\n        break;\n    default:\n        break;\n}" };
+    function wire(ta, gut, pop, run) {
+      const upd = () => { gut.textContent = ta.value.split("\n").map((_, i) => i + 1).join("\n") };
+      const ins = (t, s, e, c) => { ta.setRangeText(t, s, e, "end"); const p = s + (c == null ? t.length : c); ta.setSelectionRange(p, p); ta.dispatchEvent(new Event("input")) };
+      let sel = 0, items = [], ws = 0;
+      const closeP = () => { pop.style.display = "none"; items = [] };
+      const openP = () => { const p = ta.selectionStart, m = ta.value.slice(0, p).match(/[#\w.]+$/), w = m ? m[0] : ""; if (w.length < 2) { closeP(); return } ws = p - w.length; items = AC.filter(k => k.startsWith(w) && k !== w).slice(0, 8); sel = 0; if (!items.length) { closeP(); return } pop.innerHTML = items.map((k, i) => '<div class="' + (i ? "" : "on") + '" data-i="' + i + '">' + esc(k) + '</div>').join(""); pop.style.display = "block" };
+      const acc = k => { let t = SN[k] || k; const c = t.indexOf("§"); t = t.replace("§", ""); ta.setRangeText(t, ws, ta.selectionStart, "end"); const p = ws + (c < 0 ? t.length : c); ta.setSelectionRange(p, p); closeP(); ta.dispatchEvent(new Event("input")) };
+      pop.onmousedown = e => { const d = e.target.closest("[data-i]"); if (d) { e.preventDefault(); acc(items[+d.dataset.i]) } };
+      ta.addEventListener("input", () => { upd(); openP() }); ta.addEventListener("blur", () => setTimeout(closeP, 120));
+      ta.addEventListener("scroll", () => { gut.scrollTop = ta.scrollTop });
+      const PR = { "(": ")", "[": "]", "{": "}", '"': '"', "'": "'" };
+      ta.addEventListener("keydown", e => {
+        const v = ta.value, s = ta.selectionStart, en = ta.selectionEnd, k = e.key, pv = v[s - 1], nx = v[s];
+        if (pop.style.display === "block") {
+          if (k === "ArrowDown" || k === "ArrowUp") { e.preventDefault(); sel = (sel + (k === "ArrowDown" ? 1 : items.length - 1)) % items.length;[...pop.children].forEach((c, i) => c.className = i === sel ? "on" : ""); return }
+          if (k === "Enter" || k === "Tab") { e.preventDefault(); acc(items[sel]); return }
+          if (k === "Escape") { e.preventDefault(); closeP(); return }
+        }
+        if (e.ctrlKey && k === "Enter") { e.preventDefault(); run(); return }
+        if (e.ctrlKey && (k === "s" || k === "S")) { e.preventDefault(); return }
+        if (k === "Tab") { e.preventDefault(); ins("    ", s, en); return }
+        if (k === "Backspace" && s === en && PR[pv] && PR[pv] === nx) { e.preventDefault(); ta.setRangeText("", s - 1, s + 1, "end"); ta.dispatchEvent(new Event("input")); return }
+        if (PR[k] && !e.ctrlKey && !e.altKey) {
+          if ((k === '"' || k === "'") && nx === k && s === en) { e.preventDefault(); ta.setSelectionRange(s + 1, s + 1); return }
+          if ((k === '"' || k === "'") && /\w/.test(pv || "")) return;
+          e.preventDefault();
+          if (s !== en) { ta.setRangeText(k + v.slice(s, en) + PR[k], s, en, "end"); ta.dispatchEvent(new Event("input")); return }
+          ins(k + PR[k], s, en, 1); return
+        }
+        if ((k === ")" || k === "]" || k === "}") && s === en && nx === k) { e.preventDefault(); ta.setSelectionRange(s + 1, s + 1); return }
+        if (k === "}" && s === en) { const ls = v.lastIndexOf("\n", s - 1) + 1, pre = v.slice(ls, s); if (pre.length >= 4 && /^ +$/.test(pre)) { e.preventDefault(); ta.setRangeText("}", s - 4, s, "end"); ta.dispatchEvent(new Event("input")); return } }
+        if (k === "Enter" && !e.ctrlKey) {
+          e.preventDefault(); const ls = v.lastIndexOf("\n", s - 1) + 1, ind = (v.slice(ls, s).match(/^ */) || [""])[0];
+          if (pv === "{" && nx === "}") { ins("\n" + ind + "    \n" + ind, s, en, ind.length + 5); return }
+          ins("\n" + ind + (pv === "{" ? "    " : ""), s, en); return
+        }
+      });
+      upd()
+    }
+    let WARN = 0;
+    document.addEventListener("visibilitychange", () => { if (V === "exam" && document.hidden) WARN++ });
+    function rExam() {
+      const c = CUR, att = P[c].att; if (!att) { go("levels"); return }
+      const qi = att.qs[att.cur], q = CATS[c].qs[qi], T = tests(q), rs = att.res[qi];
+      if (att.code[qi] == null) att.code[qi] = TPL;
+      const open = T.op.map((x, i) => '<div class="given"><b>Open Test Case ' + (i + 1) + '</b><br>Input:<pre>' + esc(x) + '</pre>Expected Output:<pre>' + esc(ex(q, x)) + '</pre></div>').join("");
+      const sample = '<h3>Sample Input</h3><pre>' + esc(q.s) + '</pre><h3>Sample Output</h3><pre>' + esc(ex(q, q.s)) + '</pre>';
+      app.innerHTML = '<div class="exam"><div class="top"><span class="logo">GV PORTAL</span><span>' + CATS[c].name + ' · Level ' + att.l + ' · Program ' + (att.cur + 1) + ' of ' + att.qs.length + '</span><div class="sp"></div><b id="tm" style="color:var(--ac)">30:00</b><button class="btn o" id="ex">Save &amp; Exit</button><button class="btn r" id="fin">Finish Test</button></div>' +
+        '<div class="split"><div class="pl"><div class="tabs" style="margin-bottom:10px">' + att.qs.map((_, i) => '<button data-q="' + i + '" class="' + (i === att.cur ? "on" : "") + '">Question ' + (i + 1) + '</button>').join("") + '</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"><button class="btn o" id="prevq"' + (att.cur === 0 ? ' disabled' : '') + '>← Previous Question</button><button class="btn" id="nextq"' + (att.cur >= att.qs.length - 1 ? ' disabled' : '') + '>Next Question →</button><span style="align-self:center;color:var(--mu);font-size:13px">Question ' + (att.cur + 1) + ' of ' + att.qs.length + '</span></div><h2>' + esc(q.t) + '</h2>' + (q.ai ? '<div class="warn">AI-authored question, review required.</div>' : "") + '<h3>Problem</h3><p>' + esc(q.sc) + '</p><p>' + esc(q.task) + '</p>' + sample + '<h3>Public Test Cases</h3>' + open + '<p style="color:var(--mu);font-size:13px">Five hidden test cases run on Submit.</p>' + foot + '</div>' +
+        '<div class="pr"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn o" id="run">Run Code</button><button class="btn" id="sub">Submit</button></div>' +
+        '<div class="ed"><pre id="gut">1</pre><textarea id="code" spellcheck="false" wrap="off"></textarea><div class="ac" id="pop"></div></div>' +
+        '<div class="bot"><h3 style="margin:0">Custom Input</h3><textarea id="cin" spellcheck="false"></textarea><h3 style="margin:0">Output</h3><pre id="out" style="min-height:34px"></pre><div id="er" style="font-size:14px"></div><div id="rs">' + resBox(rs) + '</div></div></div></div></div>';
+      const ta = $("code"); ta.value = att.code[qi]; $("cin").value = q.s;
+      ta.oninput = () => { att.code[qi] = ta.value; save() };
+      const run = async () => {
+        $("out").textContent = "Running..."; $("er").textContent = ""; const r = await runC(ta.value, $("cin").value); $("out").textContent = r.out || "";
+        if (!r.ok) {
+          const L = errLine(r); $("er").textContent = L ? "Error in line " + L : String(r.err).replace(/^ERROR:\s*/, "").split("\n").filter(Boolean)[0] || "Error";
+          if (L) { const ls = ta.value.split("\n"); let s = 0; for (let i = 0; i < L - 1; i++)s += ls[i].length + 1; ta.focus(); ta.setSelectionRange(s, s + (ls[L - 1] || "").length) }
+        }
+      };
+      wire(ta, $("gut"), $("pop"), run); $("run").onclick = run; $("sub").onclick = () => submitQ();
+      app.querySelectorAll("[data-q]").forEach(b => b.onclick = () => { att.cur = +b.dataset.q; save(); render() });
+      if ($("prevq")) $("prevq").onclick = () => { if (att.cur > 0) { att.cur--; save(); render() } };
+      if ($("nextq")) $("nextq").onclick = () => { if (att.cur < att.qs.length - 1) { att.cur++; save(); render() } };
+      $("ex").onclick = () => { save(); try { document.fullscreenElement && document.exitFullscreen() } catch (e) { } go("levels", c) };
+      $("fin").onclick = () => modal("Are you sure you want to finish this test?", [["Continue Test", null, "o"], ["Finish Test", () => finish(c), "r"]]);
+      clearInterval(tick); tick = setInterval(() => { const ms = att.end - Date.now(); if (ms <= 0) { finish(c); return } const t = $("tm"); if (t) t.textContent = String(Math.floor(ms / 60000)).padStart(2, "0") + ":" + String(Math.floor(ms / 1000) % 60).padStart(2, "0") }, 500)
+    }
+    function resBox(r) {
+      if (!r) return ""; const sc = (r.cerr != null && r.cerr !== false && r.cerr !== 0 && typeof r.cerr === "number") ? r.cerr : 0;
+      return '<div class="tc">Compilation: ' + (r.cerr ? '<span class="f">Failed' + (r.cerr > 0 ? ' (line ' + r.cerr + ')' : '') + '</span>' : '<span class="p">Successful</span>') + '</div>' +
+        r.op.map((p, i) => '<div class="tc">Open Test Case ' + (i + 1) + ': <span class="' + (p ? "p" : "f") + '">' + (p ? "Passed" : "Failed") + '</span></div>').join("") +
+        '<div class="tc">Hidden Test Cases: <b>' + r.hp + '/5 Passed</b></div><div class="tc">Score: <b>' + r.score + ' / 100</b> ' + (r.completed ? '<span class="p">· Completed</span>' : "") + '</div>'
+    }
+    async function submitQ() {
+      const c = CUR, att = P[c].att, qi = att.qs[att.cur], q = CATS[c].qs[qi], T = tests(q), code = att.code[qi] || TPL, b = $("sub"); b.disabled = true; $("rs").innerHTML = '<div class="tc">Running 7 test cases...</div>';
+      const op = [], hd = []; let cerr = 0;
+      for (const x of T.op) { const o = await runC(code, x); if (o.compile && !cerr) cerr = errLine(o) || -1; op.push(o.ok && norm(o.out) === norm(ex(q, x))); if (cerr) break }
+      if (cerr) { while (op.length < 2) op.push(false); for (let i = 0; i < 5; i++)hd.push(false) } else for (const x of T.hd) { const o = await runC(code, x); hd.push(o.ok && norm(o.out) === norm(ex(q, x))) }
+      const hp = hd.filter(Boolean).length, score = op.filter(Boolean).length * 10 + hp * 16, pr = att.res[qi];
+      att.res[qi] = { score: Math.max(pr ? pr.score : 0, score), completed: !!(pr && pr.completed) || hp === 5, op, hp, cerr, last: score };
+      att.res[qi].score = Math.max(pr ? pr.score : 0, score); save(); render()
+    }
+    function finish(c) {
+      const att = P[c].att; if (!att) return; const R0 = i => att.res[i] || {}, sc = att.qs.map(i => R0(i).score || 0), score = Math.round(sum(sc) / att.qs.length);
+      const comp = att.qs.every(i => R0(i).completed), elig = comp && score >= 90;
+      const R = { c, l: att.l, score, elig, at: Date.now(), progs: att.qs.map(i => ({ t: CATS[c].qs[i].t, score: R0(i).score || 0, op: R0(i).op || [false, false], hp: R0(i).hp || 0, cerr: R0(i).cerr || 0, completed: !!R0(i).completed })) };
+      if (elig) { P[c].done[att.l] = score; P[c].unlocked = Math.max(P[c].unlocked, Math.min(nLv(c), att.l + 1)) }
+      P[c].hist.push(R); P[c].att = null; P.last = R; save(); try { document.fullscreenElement && document.exitFullscreen() } catch (e) { } go("result", c)
+    }
+    function rResult() {
+      const R = P.last, c = R.c;
+      const rev = R.score === 90 ? '<h3 style="color:#000">Detailed Review</h3>' + R.progs.map(p => '<p><b>' + esc(p.t) + '</b><br>Open tests passed: ' + p.op.filter(Boolean).length + '/2 · Hidden tests passed: ' + p.hp + '/5' + (p.cerr ? '<br>Compilation error' + (p.cerr > 0 ? ' near line ' + p.cerr : "") : "") + (p.hp < 5 && !p.cerr ? '<br>Mistake: output differs from the expected result on ' + (5 - p.hp) + ' hidden case(s). Re-check edge cases and the exact output text.' : "") + (p.op.includes(false) && !p.cerr ? '<br>Mistake: a public test case failed. Compare your output with the expected output.' : "") + '</p>').join("") : "";
+      app.innerHTML = topbar() + '<div class="res ' + (R.elig ? "ok" : "") + '"><h2>' + CATS[c].name + ' · Level ' + R.l + '</h2><p class="big">Review Eligible: ' + (R.elig ? "YES" : "NO") + '</p><p>Score: <b>' + R.score + ' / 100</b></p>' + '<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">' + '<button class="btn" id="rt">Retry Level</button>' + '<button class="btn o" id="hm">Return to Home</button></div></div>' + foot;
+      wireTop(); $("hm").onclick = () => go("home"); if ($("nl")) $("nl").onclick = () => startAtt(c, R.l + 1); if ($("rt")) $("rt").onclick = () => startAtt(c, R.l)
+    }
+    // ===== IPR =====
+    function genIpr() {
+      const idx = [...Array(PL.length).keys()].sort(() => Math.random() - .5), cp = idx.filter(i => PL[i][4]).slice(0, 3), rest = idx.filter(i => !cp.includes(i)), dbs = ["G", "E"]; let n = 1;
+      const B = rest.slice(0, 4).map(i => PL[i]), C = rest.slice(4, 7).map(i => PL[i]), E = rest.slice(7, 10).map(i => PL[i]), Dd = cp.map(i => PL[i]);
+      return {
+        B: B.map((p, j) => ({ n: n++, db: dbs[j % 2], given: ["Patent Application: " + p[0]], f: [dt, st, gr, ti] })),
+        C: C.map((p, j) => ({ n: n++, db: dbs[j % 2], given: ["Inventor: " + p[2], "Grant date: " + p[1], "Title description: " + p[3]], f: [an, ti, st] })),
+        D: Dd.map((p, j) => ({ n: n++, db: dbs[j % 2], given: ["CPC Classification code: " + p[4], "Country of origin: US", "Publication date range: " + p[1] + " : " + p[1], "Hint: " + p[3]], f: [tp, ap, st] })),
+        E: E.map((p, j) => ({ n: n++, db: dbs[(j + 1) % 2], given: ["Inventor: " + p[2], "Publication date: " + p[1], "Hint: Patent about " + p[3] + "."], f: [dn, ap, at, st] }))
+      }
+    }
+    function newIprSet() { P.ipr = { ans: {}, done: false, set: genIpr(), id: Math.floor(1000 + Math.random() * 9000), tab: "G", sec: "A" }; save() }
+    function rIpr() {
+      if (!P.ipr.set) newIprSet(); let cur = P.ipr.tab || "G", sec = P.ipr.sec || "A"; const S = P.ipr.set, IQ = [...S.B, ...S.C, ...S.D, ...S.E];
+      const ans = P.ipr.ans, done = q => q.f.every((f, i) => ans["q" + q.n + "_" + i]), ks = Object.keys(D);
+      const qh = q => '<div class="given"><b>' + q.n + ']</b> ' + q.given.map(esc).join("<br>") + '<br><i>Database: ' + D[q.db][0] + '</i>' + q.f.map((f, i) => { const k = "q" + q.n + "_" + i, v = esc(ans[k] || ""); return '<div class="fld"><label>' + esc(f[0]) + '</label>' + (f[1] === "s" ? '<select data-k="' + k + '"><option value="">Select</option>' + ["FILED", "PUBLISHED", "GRANTED"].map(o => '<option' + (ans[k] === o ? " selected" : "") + '>' + o + '</option>').join("") + '</select>' : '<input data-k="' + k + '" data-t="' + f[1] + '" value="' + v + '" autocomplete="off">') + '</div>' }).join("") + '</div>';
+      const body = sec === "A" ? '<h2>Section A – Patent Search Websites</h2><p style="color:var(--mu)">Use the database named in each question, then answer Sections B to E.</p><div class="lv">' + ks.map((k, i) => '<div class="lc"><b>' + D[k][0] + '</b><p style="color:var(--mu);font-size:13px;margin:6px 0 10px">' + esc(tools[i][2]) + '</p><a class="btn" target="_blank" rel="noopener" href="' + D[k][1] + '" style="text-decoration:none;display:inline-block">Open website ↗</a></div>').join("") + '</div>' : '<h2>Section ' + sec + '</h2>' + S[sec].map(qh).join("");
+      app.innerHTML = '<div class="exam"><div class="top"><span class="logo">GV PORTAL</span><span>IPR PATENT SEARCH</span><span id="cnt" style="color:var(--mu)"></span><div class="sp"></div><button class="btn o" id="nq">New Question Set</button><button class="btn o" id="ex">Save &amp; Exit</button><button class="btn r" id="fin">Finish Test</button></div><div class="split" style="grid-template-columns:minmax(0,1fr)"><div class="pl" style="border-right:0"><div class="tabs" style="margin-bottom:12px;flex-wrap:wrap">' + ["A", "B", "C", "D", "E"].map(x => '<button data-s="' + x + '" class="' + (x === sec ? "on" : "") + '">Section ' + x + '</button>').join("") + '</div>' + body + foot + '</div>' + '</div></div>';
+      const cnt = () => { $("cnt").textContent = "Set #" + P.ipr.id + " · " + IQ.filter(done).length + " / " + IQ.length + " answered" }; cnt();
+      app.querySelectorAll("[data-k]").forEach(el => el.addEventListener("input", () => { if (el.dataset.t === "u") el.value = el.value.toUpperCase(); ans[el.dataset.k] = el.value; save(); cnt() }));
+      app.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { P.ipr.sec = b.dataset.s; save(); rIpr(); const p = app.querySelector(".pl"); if (p) p.scrollTop = 0 });
+      $("ex").onclick = () => go("home");
+      $("nq").onclick = () => modal("Generate a new set of questions? Current answers will be cleared.", [["Cancel", null, "o"], ["New Question Set", () => { newIprSet(); rIpr() }, "r"]]);
+      $("fin").onclick = () => modal("Finish the IPR Patent Search test? Answers are saved. Auto-grading is not available because no answer key was supplied.", [["Continue Test", null, "o"], ["Finish Test", () => { P.ipr.done = true; save(); go("home") }, "r"]])
+    }
+    // ===== start =====
+    try { const s = localStorage.getItem("gvp_session"); if (s === USER) { U = s; load(); V = "home" } } catch (e) { }
+    render();
+
+  </script>
+</body>
+
+</html>
