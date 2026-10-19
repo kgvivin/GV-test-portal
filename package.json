@@ -1,0 +1,12 @@
+{
+  "name": "gv-test-portal",
+  "version": "1.0.0",
+  "description": "GV PORTAL - C Assessment & IPR Patent Search Test Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["c-programming", "assessment", "patent-search", "gv-portal"],
+  "author": "Vivin",
+  "license": "ISC"
+}
